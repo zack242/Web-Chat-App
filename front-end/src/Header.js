@@ -9,8 +9,8 @@ import Context from './Context';
 
 const useStyles = (theme) => ({
   header: {
-    padding: theme.spacing(1),
-    backgroundColor: 'rgba(255,255,255,.3)',
+    padding: theme.spacing(3),
+    backgroundColor: 'black',
     flexShrink: 0,
   },
   headerLogIn: {
@@ -51,7 +51,6 @@ export default function Header({
       >
         <MenuIcon />
       </IconButton>
-      Header
       {
         oauth ?
           <span>
@@ -59,9 +58,9 @@ export default function Header({
             <Link onClick={onClickLogout}>logout</Link>
           </span>
         :
-          <span>new user</span>
+        <span></span>
+
       }
-      
     </header>
   );
 }

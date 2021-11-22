@@ -1,18 +1,30 @@
 
 /** @jsxImportSource @emotion/react */
 import { useContext, useEffect } from 'react';
+import React from 'react';
 import { useCookies } from 'react-cookie';
+import { styled } from '@mui/material/styles';
 import crypto from 'crypto'
 import qs from 'qs'
 import axios from 'axios'
 // Layout
 import { useTheme } from '@mui/styles';
 import { Link } from '@mui/material';
+import PropTypes from 'prop-types';
+import Fingerprint from '@mui/icons-material/Fingerprint';
+import IconButton from '@mui/material/IconButton';
+import { Grid, Typography } from '@mui/material';
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
+import { View, Image, StyleSheet } from 'react-native';
 // Local
 import Context from './Context'
 import {
   useNavigate
 } from "react-router-dom";
+
+import image from './waitingscreen.gif';
+
 
 const base64URLEncode = (str) => {
   return str.toString('base64')
@@ -31,10 +43,11 @@ const sha256 = (buffer) => {
 const useStyles = (theme) => ({
   root: {
     flex: '1 1 auto',
-    background: theme.palette.background.default,
+    background: 'black',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+
     '& > div': {
       margin: `${theme.spacing(1)}`,
       marginLeft: 'auto',
@@ -48,7 +61,20 @@ const useStyles = (theme) => ({
       },
     },
   },
+  image :
+  {
+    width: '100%',
+    height: 'auto',
+  },
 })
+
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  background : 'black',
+}));
+
 
 const Redirect = ({
   config,
@@ -71,7 +97,37 @@ const Redirect = ({
   }
   return (
     <div css={styles.root}>
-      <Link onClick={redirect} color="secondary">Login with OpenID Connect and OAuth2</Link>
+    <Box sx={{ width: '70%' }} overflow='hidden'>
+
+    <Grid>
+
+    <Grid item xs >
+    <Item>
+      <img src={image} css={styles.image}/>
+    </Item>
+    </Grid>
+
+    <Grid item xs>
+    <Item>
+        <Typography>
+            WELCOME TO NETO CHAT
+        </Typography>
+    </Item>
+    </Grid>
+
+    <Grid item xs>
+    <Item>
+        <IconButton aria-label="Fingerprint" size="large">
+           <Fingerprint fontSize="inherit" onClick={redirect}/>
+        </IconButton>
+    </Item>
+    </Grid>
+
+
+    </Grid>
+
+    </Box>
+
     </div>
   )
 }
@@ -146,7 +202,7 @@ export default function Login({
   }
   const params = new URLSearchParams(window.location.search)
   const code = params.get('code')
-  // is there a code query parameters in the url 
+  // is there a code query parameters in the url
   if(!code){ // no: we are not being redirected from an oauth server
     if(!oauth){
       const codeVerifier = base64URLEncode(crypto.randomBytes(32))
