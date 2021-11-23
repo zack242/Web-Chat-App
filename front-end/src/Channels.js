@@ -14,7 +14,7 @@ const styles = {
     '& a': {
       padding: '.2rem .5rem',
       whiteSpace: 'nowrap',
-    }
+    },
   },
 }
 
@@ -41,20 +41,25 @@ export default function Channels() {
   }, [oauth, setChannels])
   return (
     <ul css={styles.root}>
+
       <li css={styles.channel}>
         <Link to="/channels" component={RouterLink}>Welcome</Link>
       </li>
+
       { channels.map( (channel, i) => (
+
+        
         <li key={i} css={styles.channel}>
           <Link
             href={`/channels/${channel.id}`}
             onClick={ (e) => {
               e.preventDefault()
               naviate(`/channels/${channel.id}`)
-            }}
-          >
+            }}>
             {channel.name}
           </Link>
+
+
         </li>
       ))}
     </ul>

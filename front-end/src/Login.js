@@ -117,13 +117,11 @@ const Redirect = ({
 
     <Grid item xs>
     <Item>
-        <IconButton aria-label="Fingerprint" size="large">
+        <IconButton aria-label="Fingerprint" sx={{ fontSize: 60 }}>
            <Fingerprint fontSize="inherit" onClick={redirect}/>
         </IconButton>
     </Item>
     </Grid>
-
-
     </Grid>
 
     </Box>
