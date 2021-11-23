@@ -8,6 +8,16 @@ import { Link as RouterLink } from 'react-router-dom';
 // Local
 import Context from './Context'
 import {useNavigate} from 'react-router-dom'
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import List from '@mui/material/List';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
+import ListItemButton from '@mui/material/ListItemButton';
+import Divider from '@mui/material/Divider';
+import DraftsIcon from '@mui/icons-material/Drafts';
 
 const styles = {
   root: {
@@ -16,6 +26,14 @@ const styles = {
       whiteSpace: 'nowrap',
     },
   },
+  channel: {
+  padding: '.2rem .5rem',
+  whiteSpace: 'nowrap',
+  borderright : '5px solid white',
+  fontSize : '25px',
+  marginBottom: '5px',
+  marginTop:'5px',
+}
 }
 
 export default function Channels() {
@@ -43,25 +61,47 @@ export default function Channels() {
     <ul css={styles.root}>
 
       <li css={styles.channel}>
-        <Link to="/channels" component={RouterLink}>Welcome</Link>
+
       </li>
 
+      <nav aria-label="main mailbox folders">
+      <List>
+      <Link to="/channels" component={RouterLink}>
+            <ListItem disablePadding href="/channels">
+              <ListItemButton>
+                <ListItemIcon>
+                  <InboxIcon />
+                </ListItemIcon>
+                <ListItemText primary="Home page" css={{ color: 'white' }}/>
+              </ListItemButton>
+            </ListItem>
+       </Link>
+       </List>
+  </nav>
+  <Divider />
+
+<List>
       { channels.map( (channel, i) => (
 
-        
-        <li key={i} css={styles.channel}>
-          <Link
+           <ListItem button key={i} css={styles.channel}
             href={`/channels/${channel.id}`}
             onClick={ (e) => {
               e.preventDefault()
               naviate(`/channels/${channel.id}`)
-            }}>
-            {channel.name}
-          </Link>
+            }}
+              css={{ textDecoration: 'none' }}>
 
+            <ListItemAvatar>
+            <Avatar>
+            <InboxIcon />
+            </Avatar>
+            </ListItemAvatar>
 
-        </li>
-      ))}
-    </ul>
+            <ListItemText primary={channel.name} secondary='last message'/>
+
+            </ListItem>
+          ))}
+</List>
+</ul>
   );
 }
