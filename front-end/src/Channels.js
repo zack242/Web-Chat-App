@@ -59,10 +59,7 @@ export default function Channels() {
   }, [oauth, setChannels])
   return (
     <ul css={styles.root}>
-
-      <li css={styles.channel}>
-
-      </li>
+      <h6>{oauth.email}</h6>
 
       <nav aria-label="main mailbox folders">
       <List>

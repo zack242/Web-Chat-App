@@ -5,7 +5,7 @@
 
 The project creates a Chat application similar to Discord, WhatApps, or Keybase with a minimal set of features. The user can securely create and manage channels, invite friends and post messages in a secure manner. By the end, the user will be able:
 
-* To authenticate itself using an external provider with Oauth.
+* To authenticate itself using an external provider with Oauth. done
 * Navigate through his channels and the messages associated with the current channel.
 * Share the channel access with other users.
 * Access the channel to which he was invited.

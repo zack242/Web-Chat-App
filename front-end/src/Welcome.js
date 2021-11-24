@@ -6,6 +6,7 @@ import { Grid, Typography } from '@mui/material';
 import { ReactComponent as ChannelIcon } from './icons/channel.svg';
 import { ReactComponent as FriendsIcon } from './icons/friends.svg';
 import { ReactComponent as SettingsIcon } from './icons/settings.svg';
+import ResponsiveDialog from './addChannel';
 
 const useStyles = (theme) => ({
   root: {
@@ -40,6 +41,7 @@ export default function Welcome() {
             <Typography color="textPrimary">
               Create channels
             </Typography>
+          <ResponsiveDialog />
           </div>
         </Grid>
         <Grid item xs>
