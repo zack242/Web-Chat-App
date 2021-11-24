@@ -6,6 +6,7 @@ import { styled } from '@mui/material/styles';
 import { useTheme } from '@mui/styles';
 import { IconButton, Link } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import Context from './Context';
 import Box from '@mui/material/Box';
@@ -40,14 +41,20 @@ const useStyles = (theme) => ({
 })
 
 
+
 export default function Header({
-  drawerToggleListener
+  drawerToggleListener,
 }) {
   const styles = useStyles(useTheme())
   const {
     oauth, setOauth,
-    drawerVisible, setDrawerVisible
+    drawerVisible, setDrawerVisible,
+    channels,
+
   } = useContext(Context)
+  let id = window.location.pathname.substring(10);
+  const channel = channels.find( channel => channel.id === id)
+
   const drawerToggle = (e) => {
     setDrawerVisible(!drawerVisible)
   }
@@ -55,7 +62,6 @@ export default function Header({
     e.stopPropagation()
     setOauth(null)
   }
-
 
   return (
     <header css={styles.header}>
@@ -78,7 +84,7 @@ export default function Header({
             </Grid>
 
             <Grid item xs={3}>
-              <div css={{backgroundColor:'black',textAlign: 'center'}}>   <h2> channel name </h2> </div>
+              <div css={{backgroundColor:'black',textAlign: 'center'}}>   <h2> { channel ? channel.name : 'NetoChat' } </h2> </div>
             </Grid>
 
             <Grid item xs={1}>

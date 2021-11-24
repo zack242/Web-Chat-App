@@ -20,6 +20,7 @@ const useStyles = (theme) => ({
     flexDirection: 'column',
     position: 'relative',
     overflowX: 'auto',
+    backgroundColor:'black',
   },
   fab: {
     position: 'absolute !important',
@@ -73,12 +74,14 @@ export default function Channel() {
   }
   return (
     <div css={styles.root}>
+
       <List
         channel={channel}
         messages={messages}
         onScrollDown={onScrollDown}
         ref={listRef}
       />
+
       <Form addMessage={addMessage} channel={channel} />
       <Fab
         color="primary"

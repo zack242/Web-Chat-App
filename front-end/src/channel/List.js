@@ -8,6 +8,10 @@ import { unified } from 'unified'
 import markdown from 'remark-parse'
 import remark2rehype from 'remark-rehype'
 import html from 'rehype-stringify'
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import Avatar from '@mui/material/Avatar';
+import Typography from '@mui/material/Typography';
 // Time
 import dayjs from 'dayjs'
 import calendar from 'dayjs/plugin/calendar'
@@ -16,7 +20,7 @@ dayjs.extend(calendar)
 dayjs.extend(updateLocale)
 dayjs.updateLocale('en', {
   calendar: {
-    sameElse: 'DD/MM/YYYY hh:mm A'
+    sameElse: ' hh:mm A'
   }
 })
 
@@ -25,6 +29,7 @@ const useStyles = (theme) => ({
     position: 'relative',
     flex: '1 1 auto',
     overflow: 'auto',
+    color : 'black',
     '& ul': {
       'margin': 0,
       'padding': 0,
@@ -35,8 +40,11 @@ const useStyles = (theme) => ({
   message: {
     padding: '.2rem .5rem',
     ':hover': {
-      backgroundColor: 'rgba(255,255,255,.05)',
+      border: '1px solid white',
     },
+    backgroundColor:'white',
+    marginBottom: '.9rem',
+    borderRadius: '25px',
   },
   fabWrapper: {
     position: 'absolute',
@@ -94,15 +102,25 @@ export default forwardRef(({
             .use(html)
             .processSync(message.content);
             return (
-              <li key={i} css={styles.message}>
-                <p>
-                  <span>{message.author}</span>
-                  {' - '}
-                  <span>{dayjs().calendar(message.creation)}</span>
-                </p>
-                <div dangerouslySetInnerHTML={{__html: value}}>
-                </div>
+              <li key={i} >
+
+                <Paper sx={{ maxWidth: '100%', my: 1, mx: 'auto', p: 2 }} elevation={1}>
+                        <Grid container wrap="wrap" spacing={2}>
+
+                          <Grid item>
+                            <Avatar>Z.T</Avatar>
+                            <h6 css={{textAlign:'right'}}>{dayjs().calendar(message.creation)}</h6>
+                          </Grid>
+                          <Grid item xs>
+                            <Typography>
+                            <div dangerouslySetInnerHTML={{__html: value}}>
+                            </div>
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                </Paper>
               </li>
+
             )
         })}
       </ul>
