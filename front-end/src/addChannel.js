@@ -10,12 +10,17 @@ import { useTheme } from '@mui/material/styles';
 import { useState } from 'react'
 import axios from 'axios';
 import { TextField } from '@mui/material';
+import Context from './Context';
+import {useContext, useEffect} from 'react';
+
 
 export default function ResponsiveDialog() {
+
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-  const [content, setContent] = useState('')
+  const {channels, setChannels} = useContext(Context);
+  const [content, setContent] = useState('');
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -30,13 +35,18 @@ export default function ResponsiveDialog() {
   }
 
   const onSubmit = async () => {
-  await axios.post(
-    `http://localhost:3001/channels/`
-    , {
-      name: content,
-    })
-    setContent('')
-    setOpen(false);
+
+
+  const  ChannelObj = await axios
+  .post(`http://localhost:3001/channels/`,{name: content,})
+
+  setChannels([...channels,ChannelObj.data])
+
+  setContent('')
+  setOpen(false);
+
+
+
   }
 
   return (
@@ -78,7 +88,6 @@ export default function ResponsiveDialog() {
           </div>
         </form>
         </DialogContent>
-
 
       </Dialog>
     </div>

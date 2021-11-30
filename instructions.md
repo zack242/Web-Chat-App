@@ -78,43 +78,43 @@ Application development:
   points: 4   
   level: easy   
   Make the welcome screens when a new user arrives inside the website and after they log in to be friendly, good-looking, informative, and with a call-to-action. Refer to other services on the web to take inspiration and provide relevant information about the service. This task is mostly about content editing and design. The [Buttercup](https://buttercup.pw/) homepage is a good example. Prototype your design first in a graphical editor like [Gravit Designer](https://www.designer.io/en/), then code it.
-* New channel creation   
+* New channel creation  @ZAK
   points: 6   
   level: hard   
   Insert a new action (eg a button) allowing the creation of a new channel, display the form (eg popup, screen) with the channel properties (eg name, members, ...), propose to cancel or send the form, and persist the channel in the database.
-* Channel membership and access   
+* Channel membership and access  @ZAK  
   points: 4   
   level: medium   
   Every request sent to the API server (back-end) must contain the user access token in the HTTP header with its identity (email). Once the token is validated by the authentication middleware, the user ID must be associated with the created channel (eg `owner` property). If the user does not yet exist in the database, he must be created automatically.
-* Ressource access control   
+* Ressource access control    @ZAK
   points: 4   
   level: medium   
   A user must only gain access to the channel he created or to the channels he was invited to. The APIs must return the appropriate channels. It must also prevent unexpected access and intrusion attempts. The HTTP response must return an appropriate HTTP response code and message.
-* Invite users to channels   
+* Invite users to channels   @ZAK
   points: 6   
   level: hard   
   A channel can have one to  members, the creator being the first member. It is possible to invite new members either at the channel creation or later.
-* Message modification   
+* Message modification  @DAN
   points: 2   
   level: easy   
   Once a message is sent and shared, only the message author must be able to modify its content.
-* Message removal   
+* Message removal  @DAN
   points: 2   
   level: easy   
   Once the message is sent and shared, the message author, and only him, must be able to remove it.
 * Account settings   
   points: 4   
-  level: medium   
+  level: medium  @DAN
   Create a screen for the user to modify his/her personal settings (email, name, language, theme, ...). Those properties don't have to be active. The goal is to display form components, persist their value, and load the form components with new values. For example, a switch component to select between a day and night theme illustrates how to use the switch component. On save, the value must be persisted and the switch component must reflect it. You don't have to update the overall theme UI to reflect this value. If you do, it is part of the bonus and you must mention it in the readme.
-* Gravatar integration   
+* Gravatar integration  @DAN
   points: 2   
   level: easy   
   Gravatar is a service that associates your email with an image you upload. Other services may then refer to it. Some people choose a photo of themself, others use an abstract image. It is part of the tech culture and services such as GitHub and NPM.js use it. You can use an existing component or build your own, it is very easy to integrate and it will provide a default random image if the user email is not registered.
-* Avatar selection   
+* Avatar selection  @DAN
   points: 4   
   level: medium   
   Provide the user with the possibility to choose an avatar from a selection you provide. The screen presenting this selection can be proposed once the user logged in for the first time (when the user account was not yet present inside the database and was created) or when the user edits his/her settings.
-* Personal custom avatar   
+* Personal custom avatar  @ZAK
   points: 6   
   level: hard   
   Offer the user the ability to upload his avatar in the form of an image (eg PNG, SVG, ...). Ideally, the form must support drag and drop, filter the file type and restrict the file size.
