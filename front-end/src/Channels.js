@@ -99,6 +99,5 @@ export default function Channels() {
             </ListItem>
           ))}
 </List>
-</ul>
-  );
+</ul>);
 }
