@@ -28,9 +28,9 @@ app.get('/channels', authenticate, async (req, res) => {
 
 app.post('/channels', async (req, res) => {
   const channel = await db.channels.create(req.body)
-  
   res.status(201).json(channel)
 })
+
 
 app.get('/channels/:id', async (req, res) => {
   const channel = await db.channels.get(req.params.id)

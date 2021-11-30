@@ -56,14 +56,16 @@ export default function ResponsiveDialog() {
   }
 
   const addMember = (member) => {
+
     setMembers([...members, member])
-    console.log(members);
+    setMember('')
+
   }
 
   const onSubmit = async () => {
 
-   const  ChannelObj = await axios.post(`http://localhost:3001/channels/`,{name: content,})
-
+   const  ChannelObj = await axios.post(`http://localhost:3001/channels/`,{name: content,membres : members})
+   console.log(ChannelObj);
      setChannels([...channels,ChannelObj.data])
      setContent('')
      setMembers([])
@@ -108,7 +110,7 @@ return (
             </Grid>
           ))}
           </Grid>
-        
+
           <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
               <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
               <TextField id="input-with-sx"
