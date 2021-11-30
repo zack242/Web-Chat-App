@@ -20,16 +20,25 @@ module.exports = {
       const channel = JSON.parse(data)
       return merge(channel, {id: id})
     },
-    list: async () => {
+    list: async (email) => {
       return new Promise( (resolve, reject) => {
+
         const channels = []
         db.createReadStream({
           gt: "channels:",
           lte: "channels" + String.fromCharCode(":".charCodeAt(0) + 1),
         }).on( 'data', ({key, value}) => {
           channel = JSON.parse(value)
-          channel.id = key.split(':')[1]
-          channels.push(channel)
+          console.log(channel);
+          if(channel.membres)
+          {
+            if(channel.membres.includes(email))
+            {
+              channel.id = key.split(':')[1]
+              channels.push(channel)
+            }
+          }
+
         }).on( 'error', (err) => {
           reject(err)
         }).on( 'end', () => {

@@ -7,4 +7,5 @@ const config = {
 
 app.listen(config.port, () => {
   console.log(`Chat is waiting for you at http://localhost:${config.port}`)
+  
 })

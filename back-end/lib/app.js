@@ -17,12 +17,13 @@ app.get('/', (req, res) => {
   res.send([
     '<h1>ECE WebTech Chat</h1>'
   ].join(''))
+
 })
 
 // Channels
 
 app.get('/channels', authenticate, async (req, res) => {
-  const channels = await db.channels.list()
+  const channels = await db.channels.list(req.user.email)
   res.json(channels)
 })
 

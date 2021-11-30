@@ -31,10 +31,11 @@ export default function ResponsiveDialog() {
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-  const {channels, setChannels} = useContext(Context);
+  const {channels, setChannels,oauth} = useContext(Context);
   const [content, setContent] = useState('');
   const [member, setMember] = useState('');
-  const [members, setMembers] = useState([])
+  const [members, setMembers] = useState([oauth.email])
+
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -65,7 +66,6 @@ export default function ResponsiveDialog() {
   const onSubmit = async () => {
 
    const  ChannelObj = await axios.post(`http://localhost:3001/channels/`,{name: content,membres : members})
-   console.log(ChannelObj);
      setChannels([...channels,ChannelObj.data])
      setContent('')
      setMembers([])
