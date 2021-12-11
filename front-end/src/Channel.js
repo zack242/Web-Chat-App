@@ -45,23 +45,27 @@ export default function Channel() {
     setMessages([...messages, message])
   }
   useEffect( () => {
-    const fetch = async () => {
-      try{
-        const {data: messages} = await axios.get(`http://localhost:3001/channels/${id}/messages`, {
-          headers: {
-            // TODO: secure the request
-          }
-        })
-        setMessages(messages)
-        if(listRef.current){
-          listRef.current.scroll()
+
+  const fetch = async () => {
+    try{
+      const {data: messages} = await axios.get(`http://localhost:3001/channels/${id}/messages`, {
+        headers: {
+              // TODO: secure the request
+        }})
+      setMessages(messages)
+      if(listRef.current){
+        listRef.current.scroll()
         }
-      }catch(err){
-        navigate('/oups')
-      }
-    }
-    fetch()
-  }, [id, oauth, navigate])
+        }catch(err){
+           navigate('/oups')
+        }
+     }
+ const interval = setInterval(() => {
+     fetch()
+  },1);
+  return () => clearInterval(interval);
+ }, [id, oauth, navigate])
+
   const onScrollDown = (scrollDown) => {
     setScrollDown(scrollDown)
   }
