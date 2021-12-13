@@ -42,7 +42,7 @@ const useStyles = (theme) => ({
     ':hover': {
       border: '1px solid white',
     },
-    backgroundColor:'white',
+    backgroundColor:'whithe',
     marginBottom: '.9rem',
     borderRadius: '25px',
   },
@@ -56,8 +56,15 @@ const useStyles = (theme) => ({
     position: 'fixed !important',
     top: 0,
     width: '50px',
-  },
+  }
 })
+
+
+const unit_message = {
+      marginTop:"50px",
+      marginLeft:"30px",
+      marginRight:"30px",
+};
 
 export default forwardRef(({
   channel,
@@ -93,7 +100,6 @@ export default forwardRef(({
   })
   return (
     <div css={styles.root} ref={rootEl}>
-      <h1>Messages for {channel.name}</h1>
       <ul>
         { messages.map( (message, i) => {
             const {value} = unified()
@@ -101,24 +107,29 @@ export default forwardRef(({
             .use(remark2rehype)
             .use(html)
             .processSync(message.content);
+
             return (
               <li key={i} >
+              <div style={unit_message}>
+                  <Grid container spacing={2}>
+                    <Grid item xs={2}>
+                      <Avatar>Z.T</Avatar>
+                    </Grid>
+                    <Grid item xs={8}>
+                      <div css={{color:'grey', fontSize:'15px;', color:'blue', marginTop:'0px;'}}>{message.author}</div>
+                    </Grid>
+                    <Grid item xs={2}>
+                      <div css={{color:'grey', fontSize:'10px;'}}>{dayjs().calendar(message.creation)}</div>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Typography>
+                        <div css={{color:'grey', fontSize:'12px;', color:'grey', marginLeft:'70px', marginRight:'60px', marginTop:'-40px'}} dangerouslySetInnerHTML={{__html: value}}>
+                        </div>
+                      </Typography>
+                    </Grid>
 
-                <Paper sx={{ maxWidth: '100%', my: 1, mx: 'auto', p: 2 }} elevation={1}>
-                        <Grid container wrap="wrap" spacing={2}>
-
-                          <Grid item>
-                            <Avatar>Z.T</Avatar>
-                            <h6 css={{textAlign:'right'}}>{dayjs().calendar(message.creation)}</h6>
-                          </Grid>
-                          <Grid item xs>
-                            <Typography>
-                            <div dangerouslySetInnerHTML={{__html: value}}>
-                            </div>
-                            </Typography>
-                          </Grid>
-                        </Grid>
-                </Paper>
+                  </Grid>
+                </div>
               </li>
 
             )

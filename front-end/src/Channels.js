@@ -19,6 +19,9 @@ import ListItemButton from '@mui/material/ListItemButton';
 import Divider from '@mui/material/Divider';
 import DraftsIcon from '@mui/icons-material/Drafts';
 
+import Badge from '@mui/material/Badge';
+import MailIcon from '@mui/icons-material/Mail';
+
 const styles = {
   root: {
     '& a': {
@@ -95,6 +98,10 @@ export default function Channels() {
             </ListItemAvatar>
 
             <ListItemText primary={channel.name} secondary='last message'/>
+
+            <Badge badgeContent={4} color="primary">
+              <MailIcon color="action" />
+            </Badge>
 
             </ListItem>
           ))}

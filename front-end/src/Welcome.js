@@ -8,6 +8,7 @@ import { ReactComponent as FriendsIcon } from './icons/friends.svg';
 import { ReactComponent as SettingsIcon } from './icons/settings.svg';
 import ResponsiveDialog from './addChannel';
 
+
 const useStyles = (theme) => ({
   root: {
     height: '100%',

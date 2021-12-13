@@ -11,6 +11,7 @@ import Form from './channel/Form'
 import List from './channel/List'
 import Context from './Context'
 import { useNavigate, useParams } from 'react-router-dom'
+import Header from './Header'
 
 const useStyles = (theme) => ({
   root: {
@@ -20,7 +21,7 @@ const useStyles = (theme) => ({
     flexDirection: 'column',
     position: 'relative',
     overflowX: 'auto',
-    backgroundColor:'black',
+    backgroundColor:'white',
   },
   fab: {
     position: 'absolute !important',
@@ -72,13 +73,17 @@ export default function Channel() {
   const onClickScroll = () => {
     listRef.current.scroll()
   }
+  const [drawerMobileVisible, setDrawerMobileVisible] = useState(false)
+  const drawerToggleListener = () => {
+    setDrawerMobileVisible(!drawerMobileVisible)
+  }
   // On refresh, context.channel is not yet initialized
   if(!channel){
     return (<div>loading</div>)
   }
   return (
     <div css={styles.root}>
-
+    <Header drawerToggleListener={drawerToggleListener} />
       <List
         channel={channel}
         messages={messages}

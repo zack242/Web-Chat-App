@@ -19,7 +19,7 @@ const useStyles = (theme) => {
     content: {
       flex: '1 1 auto',
       '&.MuiTextField-root': {
-        marginRight: theme.spacing(1),
+        marginRight: theme.spacing(1)
       },
     },
     send: {
