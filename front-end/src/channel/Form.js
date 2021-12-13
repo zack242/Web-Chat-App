@@ -23,6 +23,7 @@ const useStyles = (theme) => {
       },
     },
     send: {
+      height:'55px;',
     },
   }
 }
@@ -66,7 +67,6 @@ export default function Form({
           endIcon={<SendIcon />}
           onClick={onSubmit}
         >
-          Send
         </Button>
       </div>
     </form>
