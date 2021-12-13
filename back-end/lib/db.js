@@ -88,6 +88,23 @@ module.exports = {
         })
       })
     },
+    update: (message) => {
+       const id = message.content.channelId
+       const creation = message.content.creation
+
+        db.put(`messages:${id}:${creation}`,
+         JSON.stringify({
+         author: user.content.author,
+         content: user.content.content
+       }))
+    },
+    delete: (channelId,creation) => {
+      //console.log(channelId);
+      console.log(creation)
+      console.log(`messages:${channelId}:${creation}`);
+      db.del(`messages:${channelId}:${creation}`)
+
+    }
   },
   users: {
     create: async (user) => {

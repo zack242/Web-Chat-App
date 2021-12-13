@@ -35,7 +35,7 @@ const useStyles = (theme) => ({
 export default function Channel() {
   const navigate = useNavigate()
   const { id } = useParams()
-  const {channels, oauth} = useContext(Context)
+  const {channels,oauth} = useContext(Context)
   const channel = channels.find( channel => channel.id === id)
   const styles = useStyles(useTheme())
   const listRef = useRef()
@@ -44,27 +44,26 @@ export default function Channel() {
   const addMessage = (message) => {
     setMessages([...messages, message])
   }
-  useEffect( () => {
 
+  useEffect( () => {
   const fetch = async () => {
     try{
-      const {data: messages} = await axios.get(`http://localhost:3001/channels/${id}/messages`, {
-        headers: {
-              // TODO: secure the request
-        }})
-      setMessages(messages)
-      if(listRef.current){
-        listRef.current.scroll()
-        }
-        }catch(err){
-           navigate('/oups')
-        }
-     }
- const interval = setInterval(() => {
-     fetch()
-  },1);
+          const {data: messages} = await axios.get(`http://localhost:3001/channels/${id}/messages`, {
+            headers: {
+                  // TODO: secure the request
+            }})
+          setMessages(messages)
+          if(listRef.current){
+            //listRef.current.scroll()
+            }
+            }catch(err){
+               navigate('/oups')
+            }
+         }
+        const interval = setInterval(() => {
+         fetch()},1);
   return () => clearInterval(interval);
- }, [id, oauth, navigate])
+  }, [id, oauth, navigate])
 
   const onScrollDown = (scrollDown) => {
     setScrollDown(scrollDown)
@@ -86,7 +85,8 @@ export default function Channel() {
         ref={listRef}
       />
 
-      <Form addMessage={addMessage} channel={channel} />
+      <Form addMessage={addMessage} channel={channel}  />
+
       <Fab
         color="primary"
         aria-label="Latest messages"
