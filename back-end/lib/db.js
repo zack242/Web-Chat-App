@@ -94,14 +94,12 @@ module.exports = {
 
         db.put(`messages:${id}:${creation}`,
          JSON.stringify({
-         author: user.content.author,
-         content: user.content.content
+         author: message.content.author,
+         content: message.content.content
        }))
     },
     delete: (channelId,creation) => {
       //console.log(channelId);
-      console.log(creation)
-      console.log(`messages:${channelId}:${creation}`);
       db.del(`messages:${channelId}:${creation}`)
 
     }
