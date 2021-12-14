@@ -25,6 +25,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
+import Gravatar from 'react-gravatar'
+
 
 
 import dayjs from 'dayjs'
@@ -159,7 +161,7 @@ export default forwardRef(({
                     <Paper sx={{maxWidth: '100%',my: 1,mx: 'auto',p: 2}} elevation={1}>
                        <Grid container="container" wrap="wrap" spacing={2}>
                         <Grid item="item">
-                        <Avatar>Z.T</Avatar>
+                        <Gravatar size={50} email="zakaria_009@hotmail.fr" rating="g" default="mm"/>
                         <h6 css={{textAlign: 'right'}}>{dayjs().calendar(message.creation)}</h6>
                         </Grid>
 
