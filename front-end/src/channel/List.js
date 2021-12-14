@@ -90,7 +90,7 @@ export default forwardRef(({
   const throttleTimeout = useRef(null) // react-hooks/exhaustive-deps
   const [isEditable, setisEditable] = useState(true);
   const [editedMessage, setEditedMessage] = useState('');
-  const [index, setIndex] = useState('');
+  const [index, setIndex] = useState('-1');
 
 
     const handleEdit = (e) => {
@@ -164,19 +164,8 @@ export default forwardRef(({
                         </Grid>
 
                         <Grid item="item" xs="xs">
-                        { isEditable ?
-                          (
-                          <span> {message.content}
+                        { (isEditable && i==index) ?
 
-                               <Tooltip title="Delete">
-                                <Button value={i} onClick={handleDelete}>Sup</Button>
-                               </Tooltip>
-
-                               <Tooltip describeChild title="Does not add if it already exists.">
-                               <Button value={i} onClick={handleEdit}>Mod</Button>
-                               </Tooltip>
-                          </span>)
-                          :
                           (
                             <span>
                             <TextField
@@ -193,6 +182,19 @@ export default forwardRef(({
                                 <CancelIcon/>
                               </IconButton>
 
+                            </span>
+                        )
+                          :
+                          (
+                            <span> {message.content}
+
+                                 <Tooltip title="Delete">
+                                  <Button value={i} onClick={handleDelete}>Sup</Button>
+                                 </Tooltip>
+
+                                 <Tooltip describeChild title="Does not add if it already exists.">
+                                 <Button value={i} onClick={handleEdit}>Mod</Button>
+                                 </Tooltip>
                             </span>
                           )
 
