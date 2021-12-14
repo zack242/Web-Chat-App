@@ -24,7 +24,11 @@ export const Provider = ({
               oauth.id_token.split('.')[1], 'base64'
             ).toString('utf-8')
           )
+          oauth.username = payload.name
           oauth.email = payload.email
+          console.log(payload);
+          console.log('authentififjiji');
+          console.log(oauth);
           setCookie('oauth', oauth)
         }else{
           setCurrentChannel(null)

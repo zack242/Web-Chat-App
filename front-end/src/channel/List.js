@@ -162,6 +162,7 @@ export default forwardRef(({
                        <Grid container="container" wrap="wrap" spacing={2}>
                         <Grid item="item">
                         <Gravatar size={50} email="zakaria_009@hotmail.fr" rating="g" default="mm"/>
+                         {message.author}
                         <h6 css={{textAlign: 'right'}}>{dayjs().calendar(message.creation)}</h6>
                         </Grid>
 
