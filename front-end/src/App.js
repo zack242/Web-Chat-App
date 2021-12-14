@@ -8,6 +8,7 @@ import Header from './Header'
 import Main from './Main'
 import Login from './Login'
 import Context from './Context'
+import Settings from './Settings'
 // Rooter
 import {
   Route,
@@ -41,10 +42,17 @@ export default function App() {
       state: { from: location }
     }}
   />)
+  const gosettings = (<Navigate
+    to={{
+      pathname: "/",
+      state: { from: location }
+    }}
+  />)
   return (
     <div className="App" css={styles.root}>
       <Routes>
         <Route exact path="/" element={oauth ? (gochannels) : (<Login />)}/>
+        <Route exact path="/settings" element={oauth ? (<Settings />) : (gosettings)}/>
         <Route path="/channels/*" element={oauth ? (<Main />) : (gohome)}/>
         <Route path="/Oups" element={<Oups />} />
       </Routes>
