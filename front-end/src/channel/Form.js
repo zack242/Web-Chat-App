@@ -9,11 +9,9 @@ import { useTheme } from '@mui/styles';
 import Context from '../Context'
 
 const useStyles = (theme) => {
-  // See https://github.com/mui-org/material-ui/blob/next/packages/material-ui/src/OutlinedInput/OutlinedInput.js
-  const borderColor = theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.23)' : 'rgba(255, 255, 255, 0.23)';
   return {
     form: {
-      borderTop: `2px solid ${borderColor}`,
+      borderTop: `4px solid white`,
       padding: '.5rem',
       display: 'flex',
     },
@@ -33,44 +31,47 @@ export default function Form({
   addMessage,
   channel,
 }) {
-  const [content, setContent] = useState('')
-  const {oauth} = useContext(Context)
-  const styles = useStyles(useTheme())
-  const onSubmit = async () => {
+    const [content, setContent] = useState('')
+    const {oauth} = useContext(Context)
+    const styles = useStyles(useTheme())
+    const onSubmit = async () => {
     const {data: message} = await axios.post(
-      `http://localhost:3001/channels/${channel.id}/messages`
-    , {
-      content: content,
-      author: oauth.username,
-    })
-    addMessage(message)
-    setContent('')
-  }
-  const handleChange = (e) => {
-    setContent(e.target.value)
-  }
+        `http://localhost:3001/channels/${channel.id}/messages`
+      , {
+        content: content,
+        author: oauth.username,
+      })
+      addMessage(message)
+      setContent('')
+    }
+
+    const handleChange = (e) => {
+      setContent(e.target.value)
+    }
   return (
-    <form css={styles.form} onSubmit={onSubmit} noValidate>
-      <TextField
-        id="outlined-multiline-flexible"
-        label="Message"
-        multiline
-        maxRows={4}
-        value={content}
-        onChange={handleChange}
-        variant="outlined"
-        css={styles.content}
-      />
+      <form css={styles.form} onSubmit={onSubmit} noValidate>
+        <TextField
+          id="outlined-multiline-flexible"
+          label="Message"
+          multiline
+          maxRows={4}
+          value={content}
+          onChange={handleChange}
+          variant="outlined"
+          css={styles.content}
+        />
+
       <div>
         <Button
           variant="contained"
-          color="primary"
+          color="secondary"
           css={styles.send}
           endIcon={<SendIcon />}
           onClick={onSubmit}
         >
         </Button>
       </div>
+
     </form>
   )
 }

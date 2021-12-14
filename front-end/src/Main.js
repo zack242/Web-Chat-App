@@ -17,7 +17,6 @@ import {
 
 const useStyles = (theme) => ({
   root: {
-    backgroundColor: '#E9EAEA',
     overflow: 'hidden',
     flex: '1 1 auto',
     display: 'flex',

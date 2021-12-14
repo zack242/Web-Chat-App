@@ -14,9 +14,39 @@ import {
 
 const theme = createTheme({
   palette: {
-    mode: 'dark'
-
-  }
+  type: 'dark',
+  primary: {
+    main: '#3d6a97',
+  },
+  secondary: {
+    main: '#ffffff',
+    dark: '#000000',
+  },
+  background: {
+    default: '#18222d',
+    paper: '#203140',
+  },
+  text: {
+    primary: '#ffffff',
+    secondary: '#ffffff',
+  },
+},
+props: {
+  MuiList: {
+    dense: true,
+  },
+  MuiMenuItem: {
+    dense: true,
+  },
+  MuiTable: {
+    size: 'small',
+  },
+},
+typography: {
+  fontFamily: 'Lora',
+  fontSize: 12,
+  fontWeightLight: 300,
+},
 });
 
 ReactDOM.render(

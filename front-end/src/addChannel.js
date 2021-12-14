@@ -23,8 +23,8 @@ import Stack from '@mui/material/Stack';
 import Chip from '@mui/material/Chip';
 import Avatar from '@mui/material/Avatar';
 import Grid from '@mui/material/Grid';
-
-
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import IconButton from '@mui/material/IconButton';
 
 export default function ResponsiveDialog() {
 
@@ -77,9 +77,10 @@ export default function ResponsiveDialog() {
 return (
 
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Open responsive dialog
-      </Button>
+
+      <IconButton aria-label="delete" size="large" onClick={handleClickOpen}>
+      <AddCircleIcon fontSize="large" color="secondary" />
+      </IconButton>
 
       <Dialog
         fullScreen={fullScreen}
