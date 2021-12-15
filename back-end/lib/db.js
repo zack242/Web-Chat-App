@@ -7,11 +7,21 @@ const db = level(__dirname + '/../db')
 
 module.exports = {
   channels: {
-    create: async (channel) => {
+    create: async (channel,email) => {
       if(!channel.name) throw Error('Invalid channel')
-      const id = uuid()
-      await db.put(`channels:${id}`, JSON.stringify(channel))
+      if(!email) throw Error('Invalid user')
 
+      try
+      {
+        await db.put(`users:${email}`, JSON.stringify({email : email}))
+      }catch(err)
+      {
+        console.log(err);
+      }
+
+      const id = uuid()
+      channel.admin = email
+      await db.put(`channels:${id}`, JSON.stringify(channel))
       return merge(channel, {id: id})
     },
     get: async (id) => {

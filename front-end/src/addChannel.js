@@ -62,7 +62,10 @@ export default function ResponsiveDialog() {
 
 
   const  ChannelObj = await axios.post(`http://localhost:3001/channels/`,
-     {name:content,admin:oauth.email,membres:members})
+     {name:content,membres:members},{
+     headers:{
+       'Authorization': `Bearer ${oauth.access_token}`
+     }})
      setChannels([...channels,ChannelObj.data])
      setContent('')
      setMembers('[]')

@@ -34,7 +34,7 @@ describe('channels', () => {
       }])
     })
 
-    it.only(' one element', async () => {
+    it(' one element', async () => {
       // Create a channel
       await supertest(app)
       .post('/channels')
@@ -47,7 +47,7 @@ describe('channels', () => {
         id: /^\w+-\w+-\w+-\w+-\w+$/,
         name: 'channel 1'
       }])
-      console.log(channels);
+    
     })
 
   })
