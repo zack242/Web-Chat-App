@@ -4,8 +4,7 @@ import axios from 'axios';
 import {useContext} from 'react';
 import { FixedSizeList } from 'react-window';
 import Context from './Context';
-
-
+//Layout
 import ListItem from '@mui/material/ListItem';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -25,132 +24,122 @@ import Avatar from '@mui/material/Avatar';
 import Grid from '@mui/material/Grid';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import IconButton from '@mui/material/IconButton';
+//local
+import Autocomplete from '@mui/material/Autocomplete';
+import Tooltip from '@mui/material/Tooltip';
+import CancelIcon from '@mui/icons-material/Cancel';
+import {useNavigate} from 'react-router-dom'
+
 
 export default function ResponsiveDialog() {
 
-  const [open, setOpen] = React.useState(false);
   const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+  const [open, setOpen] = React.useState(false);
   const {channels, setChannels,oauth} = useContext(Context);
   const [content, setContent] = useState('');
-  const [member, setMember] = useState('');
-  const [members, setMembers] = useState([oauth.email])
+  const [members, setMembers] = useState('[]');
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+  const navigate = useNavigate()
 
 
   const handleClickOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
-    setOpen(false);
+    setOpen(false)
+    setMembers('[]')
+    setContent('')
   };
 
   const handleChange = (e) => {
     setContent(e.target.value)
   }
-  const handleChange1 = (e) => {
-    setMember(e.target.value)
-  }
-
-  const handleChangeMember = (e) => {
-    addMember(member)
-  }
-
-  const addMember = (member) => {
-
-    setMembers([...members, member])
-    setMember('')
-
-  }
+  const onTagsChange = (event, values) => {
+    setMembers(values)
+  };
 
   const onSubmit = async () => {
 
-   const  ChannelObj = await axios.post(`http://localhost:3001/channels/`,{name: content,membres : members})
+
+  const  ChannelObj = await axios.post(`http://localhost:3001/channels/`,
+     {name:content,admin:oauth.email,membres:members})
      setChannels([...channels,ChannelObj.data])
      setContent('')
-     setMembers([])
-     setOpen(false);
-  }
+     setMembers('[]')
+     setOpen(false)
+     navigate(`/channels/${ChannelObj.data.id}`)
+   }
 
-
-
-return (
-
+return(
     <div>
-
       <IconButton aria-label="delete" size="large" onClick={handleClickOpen}>
       <AddCircleIcon fontSize="large" color="secondary" />
       </IconButton>
 
-      <Dialog
+    <Dialog
         fullScreen={fullScreen}
         open={open}
         onClose={handleClose}
         aria-labelledby="responsive-dialog-title">
 
-        <DialogTitle id="responsive-dialog-title">
-           <span>Create new Channel</span>
-        </DialogTitle>
 
-        <DialogContent>
-        <form onSubmit={onSubmit} noValidate>
+    <DialogTitle id="responsive-dialog-title">
+      <center><h2>Create new channel</h2></center>
+    </DialogTitle>
 
-          <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-            <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
-            <TextField id="input-with-sx"
-                label="Channel Name"
-                variant="standard"
-                value={content}
-                onChange={handleChange} />
-          </Box>
+     <DialogContent>
 
-          <Grid container container width='250px'>
-          {members.map((member, i) => (
-            <Grid item xs>
-              <Chip avatar={<Avatar>@</Avatar>}  key={i} label={member} size='small' />
-            </Grid>
-          ))}
-          </Grid>
+      <form onSubmit={onSubmit} noValidate>
+      <Stack spacing={2} justifyContent="center" >
+      <TextField
+        variant="filled"
+        label="Channel name"
+        value={content}
+        onChange={handleChange}/>
 
-          <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
-              <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
-              <TextField id="input-with-sx"
-                    label="Member e-mail"
-                    variant="standard"
-                    value={member}
-                    onChange={handleChange1}/>
-          </Box>
+        <Autocomplete
+         multiple
+         id="tags-standard"
+         options={users}
+         onChange={onTagsChange}
+         getOptionLabel={(option) => option}
 
-          <div>
-            <DialogActions>
-            <Stack
-              direction="row"
-              justifyContent="center"
-              alignItems="center"
-              spacing={1}>
+         renderInput={(params) => (
+           <TextField
+            {...params}
+            variant="filled"
+            label="Members"
+            placeholder="example@user.com"
+            /> )}
+        />
+                <DialogActions>
+                  <center>
+                    <Stack
+                      direction="row"
+                      justifyContent="center"
+                      alignItems="center"
+                      spacing={0}>
 
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleChangeMember}>
-              Add Member
-            </Button>
+                      <IconButton aria-label="delete" size="large" onClick={handleClose}>
+                          <Tooltip title="Cancel">
+                          <CancelIcon fontSize="large" color="secondary" />
+                          </Tooltip>
+                      </IconButton>
 
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={onSubmit}>
-              Add Channel
-            </Button>
-            </Stack>
-
-            </DialogActions>
-          </div>
-
-        </form>
+                      <IconButton aria-label="delete" size="large" >
+                          <Tooltip title="Add">
+                          <AddCircleIcon fontSize="large" color="secondary" onClick={onSubmit}/>
+                          </Tooltip>
+                      </IconButton>
+                      </Stack>
+                    </center>
+                 </DialogActions>
+              </Stack>
+          </form>
         </DialogContent>
-
       </Dialog>
     </div>
   );
 }
+
+const users = ['zakaria_009@hotmail.fr','zakaria.tozy@icloud.com','admin@example.com','nezri.dan@gmail.com'];

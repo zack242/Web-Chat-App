@@ -28,13 +28,18 @@ module.exports = {
           gt: "channels:",
           lte: "channels" + String.fromCharCode(":".charCodeAt(0) + 1),
         }).on( 'data', ({key, value}) => {
+
           channel = JSON.parse(value)
-          console.log(channel);
-          if(channel.membres)
+          channel.id = key.split(':')[1]
+
+          if(channel.admin===email)
+          {
+            channels.push(channel)
+
+          }else if(channel.membres)
           {
             if(channel.membres.includes(email))
             {
-              channel.id = key.split(':')[1]
               channels.push(channel)
             }
           }

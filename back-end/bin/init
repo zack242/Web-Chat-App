@@ -13,6 +13,7 @@ const config = {
   await Promise.all([{
     name: 'Channel 1',
     members : ['zakaria_009@hotmail.fr'],
+    admin : 'zakaria_009@hotmail.fr',
     messages: [{
       author: 'sergei',
       creation: 1602831101929,
@@ -91,6 +92,7 @@ const config = {
     }]
   },{
     name: 'Channel 2',
+    admin : 'zakaria_009@hotmail.fr',
     messages: [{
       author: 'sergei',
       creation: 1602223579200,
@@ -106,6 +108,7 @@ const config = {
     }]
   },{
     name: 'Channel 3',
+    admin : 'zakaria_009@hotmail.fr',
     messages: [{
       author: 'sergei',
       creation: 1602223579200,

@@ -95,6 +95,7 @@ export default function Channels() {
      }
      fetch()
   },[oauth, setChannels])
+  console.log(channels);
 
   return(
     <div>
