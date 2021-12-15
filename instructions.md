@@ -74,27 +74,27 @@ Project management:
 
 Application development:
 
-* Welcome screens   
+* Welcome screens FAIT   
   points: 4   
   level: easy   
   Make the welcome screens when a new user arrives inside the website and after they log in to be friendly, good-looking, informative, and with a call-to-action. Refer to other services on the web to take inspiration and provide relevant information about the service. This task is mostly about content editing and design. The [Buttercup](https://buttercup.pw/) homepage is a good example. Prototype your design first in a graphical editor like [Gravit Designer](https://www.designer.io/en/), then code it.
-* New channel creation  @ZAK
+* New channel creation  @ZAK FAIT
   points: 6   
   level: hard   
   Insert a new action (eg a button) allowing the creation of a new channel, display the form (eg popup, screen) with the channel properties (eg name, members, ...), propose to cancel or send the form, and persist the channel in the database.
-* Channel membership and access  @ZAK  
+* Channel membership and access  @ZAK   FAIT
   points: 4   
   level: medium   
   Every request sent to the API server (back-end) must contain the user access token in the HTTP header with its identity (email). Once the token is validated by the authentication middleware, the user ID must be associated with the created channel (eg `owner` property). If the user does not yet exist in the database, he must be created automatically.
-* Ressource access control    @ZAK
+* Ressource access control    @ZAK OK
   points: 4   
   level: medium   
   A user must only gain access to the channel he created or to the channels he was invited to. The APIs must return the appropriate channels. It must also prevent unexpected access and intrusion attempts. The HTTP response must return an appropriate HTTP response code and message.
-* Invite users to channels   @ZAK
+* Invite users to channels   @ZAK  OK Invite des membre apres la creation
   points: 6   
   level: hard   
   A channel can have one to  members, the creator being the first member. It is possible to invite new members either at the channel creation or later.
-* Message modification  @DAN
+* Message modification  @DAN  FAIT
   points: 2   
   level: easy   
   Once a message is sent and shared, only the message author must be able to modify its content.

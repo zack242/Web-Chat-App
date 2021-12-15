@@ -10,8 +10,10 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import LogoutIcon from '@mui/icons-material/Logout';
+import Stack from '@mui/material/Stack';
 //local
 import Context from './Context';
+import BasicMenu from './ChannelSettings'
 
 const useStyles = (theme) => ({
   header: {
@@ -74,10 +76,18 @@ export default function Header({
 
             <Grid item xs={1}>
             <div css={{textAlign: 'right',marginTop : '15px'}}>
-              <IconButton aria-label="delete" size="large" color="secondary" onClick={onClickLogout}>
-              <LogoutIcon size="large"/>
+            <Stack
+              direction="row"
+              justifyContent='flex-end'
+              spacing={1}>
+              <BasicMenu />
+              <IconButton aria-label="delete" color="secondary" onClick={onClickLogout}>
+              <LogoutIcon />
               </IconButton>
+            </Stack>
+
             </div>
+
             </Grid>
             </Grid>
           </span>

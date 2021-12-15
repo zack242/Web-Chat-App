@@ -62,7 +62,7 @@ export default function ResponsiveDialog() {
 
 
   const  ChannelObj = await axios.post(`http://localhost:3001/channels/`,
-     {name:content,membres:members},{
+     {name:content,members:members},{
      headers:{
        'Authorization': `Bearer ${oauth.access_token}`
      }})

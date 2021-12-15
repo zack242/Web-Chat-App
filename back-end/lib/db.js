@@ -41,14 +41,15 @@ module.exports = {
 
           channel = JSON.parse(value)
           channel.id = key.split(':')[1]
+          console.log(channel);
 
           if(channel.admin===email)
           {
             channels.push(channel)
 
-          }else if(channel.membres)
+          }else if(channel.members)
           {
-            if(channel.membres.includes(email))
+            if(channel.members.includes(email))
             {
               channels.push(channel)
             }
@@ -62,9 +63,13 @@ module.exports = {
       })
     },
     update: (id, channel) => {
-      const original = store.channels[id]
-      if(!original) throw Error('Unregistered channel id')
-      store.channels[id] = merge(original, channel)
+      if(!id) throw Error('Invalid channel')
+      if(!channel) throw Error('Data error')
+
+      db.put(`channels:${id}`, JSON.stringify(channel))
+      console.log(channel);
+
+      return merge(channel, {id: id})
     },
     delete: (id, channel) => {
       const original = store.channels[id]
