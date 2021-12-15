@@ -33,7 +33,7 @@ app.post('/channels',authenticate, async (req, res) => {
 })
 
 
-app.get('/channels/:id', async (req, res) => {
+app.get('/channels/:id',authenticate, async (req, res) => {
   const channel = await db.channels.get(req.params.id)
   res.json(channel)
 })
