@@ -27,6 +27,9 @@ import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
 import Gravatar from 'react-gravatar'
 
+import { styled } from '@mui/material/styles';
+import ButtonBase from '@mui/material/ButtonBase';
+
 
 
 import dayjs from 'dayjs'
@@ -158,56 +161,72 @@ export default forwardRef(({
           const {value} = unified().use(markdown).use(remark2rehype).use(html).processSync(message.content);
           return (
                 <li key={i}>
-                    <Paper sx={{maxWidth: '100%',my: 1,mx: 'auto',p: 2}} elevation={1}>
-                       <Grid container="container" wrap="wrap" spacing={2}>
-                        <Grid item="item">
+
+                  <Paper sx={{ p: 2, margin: 'auto', maxWidth: 700, flexGrow: 1, marginBottom: '10px;' }}>
+                    <Grid container spacing={2}>
+                      <Grid item>
                         <Gravatar size={50} email="zakaria_009@hotmail.fr" rating="g" default="mm"/>
-                         {message.author}
-                         { dayjs().calendar(message.creation/1000)}
-                        <h6 css={{textAlign: 'right'}}>
+                      </Grid>
+                      <Grid item xs={12} sm container>
+                        <Grid item xs container direction="column" spacing={2}>
+                          <Grid item xs>
+                            <Typography gutterBottom variant="subtitle1" component="div">
+                              {message.author}
+                            </Typography>
+                            <Typography variant="body2" gutterBottom>
+                            <Grid item="item" xs="xs">
+                            { (isEditable && i==index) ?
 
-                        </h6>
+                              (
+                                <span>
+                                <TextField
+                                  value={editedMessage}
+                                  onChange={handleChangeEdit}
+                                  label={message.content}
+                                  maxRows={2}/>
+
+                                  <IconButton  onClick={handleSetEdited}>
+                                   <SaveIcon />
+                                  </IconButton>
+
+                                  <IconButton  onClick={handleClose}>
+                                    <CancelIcon/>
+                                  </IconButton>
+
+                                </span>
+                            )
+                              :
+                              (
+                                <span> {message.content}
+
+
+                                </span>
+                              )
+
+                            }
+                           </Grid>
+                            </Typography>
+
+                          </Grid>
+                          <Grid item>
+
+                            <Typography sx={{ cursor: 'pointer' }} variant="body2">
+                              <Button value={i} onClick={handleDelete}>Sup</Button>
+                            </Typography>
+
+
+                            <Typography sx={{ cursor: 'pointer' }} variant="body2">
+                              <Button value={i} onClick={handleEdit}>Mod</Button>
+                            </Typography>
+                          </Grid>
                         </Grid>
-
-                        <Grid item="item" xs="xs">
-                        { (isEditable && i==index) ?
-
-                          (
-                            <span>
-                            <TextField
-                              value={editedMessage}
-                              onChange={handleChangeEdit}
-                              label={message.content}
-                              maxRows={2}/>
-
-                              <IconButton  onClick={handleSetEdited}>
-                               <SaveIcon />
-                              </IconButton>
-
-                              <IconButton  onClick={handleClose}>
-                                <CancelIcon/>
-                              </IconButton>
-
-                            </span>
-                        )
-                          :
-                          (
-                            <span> {message.content}
-
-                                 <Tooltip title="Delete">
-                                  <Button value={i} onClick={handleDelete}>Sup</Button>
-                                 </Tooltip>
-
-                                 <Tooltip describeChild title="Does not add if it already exists.">
-                                 <Button value={i} onClick={handleEdit}>Mod</Button>
-                                 </Tooltip>
-                            </span>
-                          )
-
-                        }
-                       </Grid>
+                        <Grid item>
+                          <Typography variant="subtitle1" component="div">
+                            { dayjs().calendar(message.creation/1000)}
+                          </Typography>
+                        </Grid>
+                      </Grid>
                     </Grid>
-
                   </Paper>
                 </li>)})}
                 </ul>
