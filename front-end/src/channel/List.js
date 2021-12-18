@@ -30,6 +30,8 @@ import Gravatar from 'react-gravatar'
 import { styled } from '@mui/material/styles';
 import ButtonBase from '@mui/material/ButtonBase';
 
+import Fade from '@mui/material/Fade';
+
 
 
 import dayjs from 'dayjs'
@@ -153,6 +155,15 @@ export default forwardRef(({
 
     })
 
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+    const handleCloseItem = () => {
+      setAnchorEl(null);
+  };
+
     return (
        <div css={styles.root} ref={rootEl}>
        <ul>
@@ -162,16 +173,16 @@ export default forwardRef(({
           return (
                 <li key={i}>
 
-                  <Paper sx={{ p: 2, margin: 'auto', maxWidth: 700, flexGrow: 1, marginBottom: '10px;' }}>
+                  <Paper sx={{ p: 2, margin: 'auto', maxWidth: 1000, flexGrow: 1, marginBottom: '10px;' }}>
                     <Grid container spacing={2}>
                       <Grid item>
-                        <Gravatar size={50} email="zakaria_009@hotmail.fr" rating="g" default="mm"/>
+                        <Gravatar css={{borderRadius: 400/ 2}} size={50} email={message.author} rating="g" default="mm"/>
                       </Grid>
                       <Grid item xs={12} sm container>
                         <Grid item xs container direction="column" spacing={2}>
                           <Grid item xs>
                             <Typography gutterBottom variant="subtitle1" component="div">
-                              {message.author}
+                              <h4>{message.author}</h4>
                             </Typography>
                             <Typography variant="body2" gutterBottom>
                             <Grid item="item" xs="xs">
@@ -209,7 +220,33 @@ export default forwardRef(({
 
                           </Grid>
                           <Grid item>
-
+                          <div>
+                         <Button
+                           id="fade-button"
+                           aria-controls="fade-menu"
+                           aria-haspopup="true"
+                           aria-expanded={open ? 'true' : undefined}
+                           onClick={handleClick}
+                         >
+                           Actions
+                         </Button>
+                         <Menu
+                           id="fade-menu"
+                           MenuListProps={{
+                             'aria-labelledby': 'fade-button',
+                           }}
+                           anchorEl={anchorEl}
+                           open={open}
+                           onClose={handleCloseItem}
+                           TransitionComponent={Fade}
+                         >
+                           <MenuItem onClick={handleCloseItem}><Button value={i} onClick={handleDelete}>Suprimer</Button></MenuItem>
+                           <MenuItem onClick={handleCloseItem}><Button value={i} onClick={handleEdit}><Typography sx={{ cursor: 'pointer' }} variant="body2">
+                             <Button value={i} onClick={handleEdit}>Modifier</Button>
+                           </Typography></Button></MenuItem>
+                         </Menu>
+                       </div>
+                        /*
                             <Typography sx={{ cursor: 'pointer' }} variant="body2">
                               <Button value={i} onClick={handleDelete}>Sup</Button>
                             </Typography>
@@ -218,11 +255,13 @@ export default forwardRef(({
                             <Typography sx={{ cursor: 'pointer' }} variant="body2">
                               <Button value={i} onClick={handleEdit}>Mod</Button>
                             </Typography>
+                          */
+
                           </Grid>
                         </Grid>
                         <Grid item>
                           <Typography variant="subtitle1" component="div">
-                            { dayjs().calendar(message.creation/1000)}
+                          <h5>  { dayjs().calendar(message.creation/1000)} </h5>
                           </Typography>
                         </Grid>
                       </Grid>

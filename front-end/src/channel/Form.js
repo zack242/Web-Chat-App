@@ -7,6 +7,7 @@ import { Button, TextField } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import { useTheme } from '@mui/styles';
 import Context from '../Context'
+import Emoji from './emoji'
 
 const useStyles = (theme) => {
   return {
@@ -60,6 +61,8 @@ export default function Form({
           variant="outlined"
           css={styles.content}
         />
+
+        
 
       <div>
         <Button
