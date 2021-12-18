@@ -31,6 +31,7 @@ export default function BasicMenu() {
   const {channels,oauth} = useContext(Context)
   const channel = channels.find( channel => channel.id === id)
   const [members,setMembers] = useState(channel.members)
+  
   const users = ['zakaria_009@hotmail.fr','zakaria.tozy@icloud.com','admin@example.com','nezri.dan@gmail.com'];
 
   const handleClick = (event) => {
