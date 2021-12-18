@@ -83,9 +83,22 @@ module.exports = {
       if(!message.author) throw Error('Invalid message')
       if(!message.content) throw Error('Invalid message')
       creation = microtime.now()
+
+      let date_ob = new Date();
+
+      let date = ("0" + date_ob.getDate()).slice(-2);
+      let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+      let year = date_ob.getFullYear();
+      let hours = date_ob.getHours();
+      let minutes = date_ob.getMinutes();
+      let seconds = date_ob.getSeconds();
+      today = year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
+
+
       await db.put(`messages:${channelId}:${creation}`, JSON.stringify({
         author: message.author,
-        content: message.content
+        content: message.content,
+        date : today
       }))
       return merge(message, {channelId: channelId, creation: creation})
     },

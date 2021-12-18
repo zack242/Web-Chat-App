@@ -38,6 +38,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import DehazeIcon from '@mui/icons-material/Dehaze';
 
+
 dayjs.extend(calendar)
 dayjs.extend(updateLocale)
 dayjs.updateLocale('en', { calendar: { sameElse: ' hh:mm A'}})
@@ -173,7 +174,9 @@ export default forwardRef(({
 
   const handletest = (e) =>
   {
-    console.log(e);
+    var today = Date(e);
+    console.log(today);
+
   }
 
     return (
@@ -182,6 +185,8 @@ export default forwardRef(({
         { messages.map((message, i) => {
 
           const {value} = unified().use(markdown).use(remark2rehype).use(html).processSync(message.content);
+          const time = message.date
+
           return (
                 <li key={i}>
 
@@ -230,7 +235,7 @@ export default forwardRef(({
                           </Grid>
                           <Grid item>
                           <div>
-                      
+
                       { isEditMode ?
                         (
                           <div>
@@ -265,7 +270,10 @@ export default forwardRef(({
                         </Grid>
                         <Grid item>
                           <Typography variant="subtitle1" component="div">
-                          <h5>  { dayjs().calendar(message.creation/1000)} </h5>
+                          <h5>
+                           {time}
+                           </h5>
+
                           </Typography>
                         </Grid>
                       </Grid>
