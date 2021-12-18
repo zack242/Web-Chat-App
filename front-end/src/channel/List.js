@@ -21,23 +21,22 @@ import FullFeaturedCrudGrid from '../tmp.js'
 import ContentEditable from 'react-contenteditable'
 import TextField from '@mui/material/TextField';
 import Tooltip from '@mui/material/Tooltip';
-import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
 import Gravatar from 'react-gravatar'
-
 import { styled } from '@mui/material/styles';
 import ButtonBase from '@mui/material/ButtonBase';
-
 import Fade from '@mui/material/Fade';
-
-
 
 import dayjs from 'dayjs'
 import calendar from 'dayjs/plugin/calendar'
 import updateLocale from 'dayjs/plugin/updateLocale'
 import axios from 'axios';
+
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import DehazeIcon from '@mui/icons-material/Dehaze';
 
 dayjs.extend(calendar)
 dayjs.extend(updateLocale)
@@ -96,13 +95,14 @@ export default forwardRef(({
    }
   const throttleTimeout = useRef(null) // react-hooks/exhaustive-deps
   const [isEditable, setisEditable] = useState(true);
+  const [isEditMode, setisEditMode] = useState(true);
   const [editedMessage, setEditedMessage] = useState('');
   const [index, setIndex] = useState('-1');
 
 
-    const handleEdit = (e) => {
-    setIndex(e.target.value)
-    setEditedMessage(messages[e.target.value].content)
+    const handleEdit = (index) => {
+    setIndex(index)
+    setEditedMessage(messages[index].content)
     setisEditable(!isEditable)
    }
 
@@ -115,7 +115,6 @@ export default forwardRef(({
       console.log(messages[index].content);
       messages[index].content=editedMessage;
       setisEditable(!isEditable)
-
 
       await axios.put(`http://localhost:3001/channels/${channel.id}/messages`,
         {
@@ -131,10 +130,11 @@ export default forwardRef(({
       }
 
 
-    const handleDelete = async (e) =>
+    const handleDelete = async (index) =>
     {
        console.log('on supprimer')
-       const creation = messages[e.target.value].creation
+       console.log(index);
+       const creation = messages[index].creation
        await axios.put(`http://localhost:3001/channels/${channel.id}/${creation}`)
      }
 
@@ -164,6 +164,18 @@ export default forwardRef(({
       setAnchorEl(null);
   };
 
+  const handleEditMode = () =>
+  {
+    setisEditMode(!isEditMode)
+    console.log('ok');
+
+  }
+
+  const handletest = (e) =>
+  {
+    console.log(e);
+  }
+
     return (
        <div css={styles.root} ref={rootEl}>
        <ul>
@@ -178,7 +190,7 @@ export default forwardRef(({
                       <Grid item>
                         <Gravatar css={{borderRadius: 400/ 2}} size={50} email={message.author} rating="g" default="mm"/>
                       </Grid>
-                      <Grid item xs={12} sm container>
+                        <Grid item xs={12} sm container>
                         <Grid item xs container direction="column" spacing={2}>
                           <Grid item xs>
                             <Typography gutterBottom variant="subtitle1" component="div">
@@ -204,13 +216,10 @@ export default forwardRef(({
                                     <CancelIcon/>
                                   </IconButton>
 
-                                </span>
-                            )
+                                </span>)
                               :
                               (
                                 <span> {message.content}
-
-
                                 </span>
                               )
 
@@ -221,41 +230,36 @@ export default forwardRef(({
                           </Grid>
                           <Grid item>
                           <div>
-                         <Button
-                           id="fade-button"
-                           aria-controls="fade-menu"
-                           aria-haspopup="true"
-                           aria-expanded={open ? 'true' : undefined}
-                           onClick={handleClick}
-                         >
-                           Actions
-                         </Button>
-                         <Menu
-                           id="fade-menu"
-                           MenuListProps={{
-                             'aria-labelledby': 'fade-button',
-                           }}
-                           anchorEl={anchorEl}
-                           open={open}
-                           onClose={handleCloseItem}
-                           TransitionComponent={Fade}
-                         >
-                           <MenuItem onClick={handleCloseItem}><Button value={i} onClick={handleDelete}>Suprimer</Button></MenuItem>
-                           <MenuItem onClick={handleCloseItem}><Button value={i} onClick={handleEdit}><Typography sx={{ cursor: 'pointer' }} variant="body2">
-                             <Button value={i} onClick={handleEdit}>Modifier</Button>
-                           </Typography></Button></MenuItem>
-                         </Menu>
+                      
+                      { isEditMode ?
+                        (
+                          <div>
+                         <IconButton>
+                            <DehazeIcon color="secondary"  onClick={handleEditMode}/>
+                         </IconButton>
+                         </div>
+                       )
+                       :
+                       (
+                         <div>
+
+                         <IconButton>
+                          <EditIcon color="secondary" onClick={() => handleEdit(i)}/>
+                         </IconButton>
+
+
+                         <IconButton color="secondary" value={i} onClick={() => handleDelete(i)}>
+                          <DeleteIcon color="secondary"/>
+                         </IconButton>
+
+
+                         <IconButton color="secondary" onClick={handleEditMode}>
+                           <CancelIcon/>
+                         </IconButton>
+                         </div>
+                       ) }
+
                        </div>
-                        /*
-                            <Typography sx={{ cursor: 'pointer' }} variant="body2">
-                              <Button value={i} onClick={handleDelete}>Sup</Button>
-                            </Typography>
-
-
-                            <Typography sx={{ cursor: 'pointer' }} variant="body2">
-                              <Button value={i} onClick={handleEdit}>Mod</Button>
-                            </Typography>
-                          */
 
                           </Grid>
                         </Grid>
