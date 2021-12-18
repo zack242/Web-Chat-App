@@ -26,9 +26,7 @@ export const Provider = ({
           )
           oauth.username = payload.name
           oauth.email = payload.email
-          console.log(payload);
-          console.log('authentififjiji');
-          console.log(oauth);
+          
           setCookie('oauth', oauth)
         }else{
           setCurrentChannel(null)

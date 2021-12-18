@@ -1,29 +1,72 @@
+/** @jsxImportSource @emotion/react */
+import {useContext, useRef, useState, useEffect} from 'react';
+import axios from 'axios';
+// Layout
 import { useTheme } from '@mui/styles';
+import {Fab} from '@mui/material';
+import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
+// Local
+import Form from './channel/Form'
+import List from './channel/List'
+import Context from './Context'
+import Header from './Header'
+import { useNavigate, useParams } from 'react-router-dom'
+
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import * as React from 'react';
-import InputLabel from '@mui/material/InputLabel';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
 import { styled } from '@mui/material/styles';
-import Header from './Header'
-import {useContext, useRef, useState, useEffect} from 'react';
+import Switch from '@mui/material/Switch';
+import Gravatar from 'react-circle-gravatar'
+import { Image } from 'react-native'
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import Stack from '@mui/material/Stack';
+import Avatar from '@mui/material/Avatar';
+import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
+import IconButton from '@mui/material/IconButton';
+
+
+import avatar1 from './icons/avatar1.png';
+import avatar2 from './icons/avatar2.png';
+import avatar3 from './icons/avatar3.png';
+import avatar4 from './icons/avatar4.jpg';
+import avatar5 from './icons/avatar5.png';
 
 
 const useStyles = (theme) => ({
   root: {
-    background: theme.palette.background.default,
-    overflow: 'hidden',
+    height: '100%',
     flex: '1 1 auto',
     display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-})
+    flexDirection: 'column',
+    position: 'relative',
+    overflowX: 'auto',
 
+  },
+  container :
+  {
+
+  },
+  image:
+  {
+        borderRadius: "50%",
+        width: 90,
+        height: 90,
+        display: "block"
+  },
+  pdp:
+  {
+        borderRadius: "50%",
+        width: 190,
+        height: 190,
+        display: "block"
+  }
+})
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 34,
@@ -70,58 +113,124 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     borderRadius: 20 / 2,
   },
 }));
+
 export default function Settings() {
+
   const styles = useStyles(useTheme())
-  const [age, setAge] = React.useState('');
+  const [user,setUser] = useState()
+  const [age, setAge] = useState('');
+  const [isAvatar,setisAvatar] = useState(false)
+  const [isGravavatar,setisGravavatar] = useState(true)
+  const [avatar,setAvatar]=useState(avatar1)
 
   const handleChange = (event) => {
     setAge(event.target.value);
   };
-  const [drawerMobileVisible, setDrawerMobileVisible] = useState(false)
+  const {
+    oauth,
+  } = useContext(Context)
 
-  const drawerToggleListener = () => {
-    setDrawerMobileVisible(!drawerMobileVisible)
+  const handleChange1 = () =>
+  {
+    setisAvatar(!isAvatar);
   }
-  return (
-    <main css={styles.root}>
-      <Header drawerToggleListener={drawerToggleListener} />
-      <div>
-        <h4>Settings</h4>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <TextField fullWidth  id="outlined-basic" label="Nom" variant="outlined" />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField fullWidth  id="outlined-basic" label="Prénom" variant="outlined" />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField fullWidth  id="outlined-basic" label="Email" variant="outlined" />
-          </Grid>
-          <Grid item xs={6}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Langue</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={age}
-                label="Age"
-                onChange={handleChange}
-              >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={6}>
-          <FormControlLabel
-             control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
-             label="Theme"
-           />
-          </Grid>
-        </Grid>
+  const handleChangeGravatar = (e,c) =>
+  {
+   setisGravavatar(c)
+   setisAvatar(!isAvatar);
+  }
+  const handleChangeAvatar = (name) =>
+  {
+   setAvatar(name)
+   console.log(name);
+  }
 
-      </div>
-    </main>
+  const [drawerMobileVisible, setDrawerMobileVisible] = useState(false)
+  const drawerToggleListener = () => {
+      setDrawerMobileVisible(!drawerMobileVisible)
+    }
+
+ const label = { inputProps: { 'aria-label': 'Switch demo' } };
+
+ const saveConfig = () =>
+ {
+   console.log(Avatar);
+   console.log('utiliser le truc custom');
+
+
+
+
+ }
+
+
+  return(
+     <div css={styles.root}>
+       <center>
+        <div css={styles.container}>
+
+          <Stack
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+            spacing={1}>
+
+          {isGravavatar ? (
+          <div>
+          <Gravatar size={190} email={oauth.email} rating="g"/>
+          <h5>Gravatar avatar</h5>
+          </div>
+        ) : (
+          <div>
+          <img src={avatar} alt="Logo" css={styles.pdp}/>
+          <h5>Custom avatar</h5>
+          </div>)}
+
+        <h5> Switch avatar </h5>
+        <Switch {...label} defaultChecked onChange={handleChangeGravatar}/>
+
+        { isAvatar ?
+        (
+        <div>
+        <Stack spacing={3}>
+        <ButtonGroup sx={{border:'1px solid white'}}>
+            <Button onClick={() => handleChangeAvatar(avatar1)}> <img src={avatar1} alt="Logo" css={styles.image}/></Button>
+            <Button onClick={() => handleChangeAvatar(avatar2)}> <img src={avatar2} alt="Logo" css={styles.image}/></Button>
+            <Button onClick={() => handleChangeAvatar(avatar3)}> <img src={avatar3} alt="Logo" css={styles.image}/></Button>
+            <Button onClick={() => handleChangeAvatar(avatar4)}> <img src={avatar4} alt="Logo" css={styles.image}/></Button>
+            <Button onClick={() => handleChangeAvatar(avatar5)}> <img src={avatar5} alt="Logo" css={styles.image}/></Button>
+        </ButtonGroup>
+        <Button onClick={saveConfig}  variant="contained">Save new configuration</Button>
+        </Stack>
+        </div>)
+         :
+         (
+           <div></div>
+         )
+       }
+
+        <Grid container spacing={2}>
+           <Grid item xs={12} >
+           <TextField   label="First name" variant="filled" />
+           </Grid>
+
+           <Grid item xs={12}>
+           <TextField    id="filled-disabled" variant="filled" color="secondary" label="username"   />
+           </Grid>
+
+           <Grid item xs={12}>
+           <TextField   id="outlined-basic" label={oauth.email} variant="filled" />
+
+           </Grid>
+           <Grid item xs={12}>
+           <FormControlLabel
+            control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
+            label="Theme"/>
+         </Grid>
+       </Grid>
+       </Stack>
+    </div>
+      </center>
+    </div>
+
   );
 }
