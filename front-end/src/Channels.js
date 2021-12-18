@@ -29,6 +29,7 @@ import {useNavigate} from 'react-router-dom'
 import Gravatar from 'react-circle-gravatar'
 import { Link as RouterLink } from 'react-router-dom';
 import ResponsiveDialog from './addChannel';
+import Settings from './Settings.js'
 
 
 const useStyles = (theme) => ({
@@ -117,7 +118,7 @@ export default function Channels() {
         <ResponsiveDialog/>
 
         <IconButton aria-label="delete" size="large">
-        <SettingsIcon fontSize="large" color="secondary"/>
+        <SettingsIcon fontSize="large" color="secondary"  onClick={() => {navigate('/')}}/>
         </IconButton>
 
         </Stack>

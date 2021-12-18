@@ -80,7 +80,9 @@ export default function Header({
               direction="row"
               justifyContent='flex-end'
               spacing={1}>
-              <BasicMenu />
+              { id ? (<div><BasicMenu /></div>) :
+              (<div></div>)
+              }
               <IconButton aria-label="delete" color="secondary" onClick={onClickLogout}>
               <LogoutIcon />
               </IconButton>

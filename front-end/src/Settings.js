@@ -9,6 +9,8 @@ import InputLabel from '@mui/material/InputLabel';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import { styled } from '@mui/material/styles';
+import Header from './Header'
+import {useContext, useRef, useState, useEffect} from 'react';
 
 
 const useStyles = (theme) => ({
@@ -75,8 +77,14 @@ export default function Settings() {
   const handleChange = (event) => {
     setAge(event.target.value);
   };
+  const [drawerMobileVisible, setDrawerMobileVisible] = useState(false)
+
+  const drawerToggleListener = () => {
+    setDrawerMobileVisible(!drawerMobileVisible)
+  }
   return (
     <main css={styles.root}>
+      <Header drawerToggleListener={drawerToggleListener} />
       <div>
         <h4>Settings</h4>
         <Grid container spacing={2}>
