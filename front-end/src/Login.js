@@ -10,13 +10,12 @@ import axios from 'axios'
 // Layout
 import { useTheme } from '@mui/styles';
 import { Link } from '@mui/material';
-import PropTypes from 'prop-types';
 import Fingerprint from '@mui/icons-material/Fingerprint';
 import IconButton from '@mui/material/IconButton';
 import { Grid, Typography } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
-import { View, Image, StyleSheet } from 'react-native';
+
 // Local
 import Context from './Context'
 import {
@@ -103,7 +102,7 @@ const Redirect = ({
 
     <Grid item xs >
     <Item>
-      <img src={image} css={styles.image}/>
+      <img src={image} css={styles.image} alt={'welcome screen'}/>
     </Item>
     </Grid>
 

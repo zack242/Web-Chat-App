@@ -75,41 +75,41 @@
 Project management
 
 * Naming convention   
-  *place your graduation and comments*
+  *2/2*
 * Project structure   
-  *place your graduation and comments*
+  *4/4 the project is split en 3 folder (back-end/frond-end/dex)*
 * Code quality   
-  *place your graduation and comments*
+  *4/4*
 * Design, UX   
-  *place your graduation and comments*
+  *4/4*
 * Git and DevOps   
-  *place your graduation and comments*
+  *3/4 we use docker orchstration to run dex*
 
 Application development
 
 * Welcome screens   
-  *place your graduation and comments*
+  *3/4*
 * New channel creation   
-  *place your graduation and comments*
+  *6/6*
 * Channel membership and access   
-  *place your graduation and comments*
+  *4/4*
 * Ressource access control   
-  *place your graduation and comments*
+  *3/4*
 * Invite users to channels   
-  *place your graduation and comments*
+  *6/6*
 * Message modification   
-  *place your graduation and comments*
+  *2/2*
 * Message removal   
-  *place your graduation and comments*
+  *2/2*
 * Account settings   
-  *place your graduation and comments*
+  *4/4*
 * Gravatar integration   
-  *place your graduation and comments*
+  *2/2*
 * Avatar selection   
-  *place your graduation and comments*
+  *4/4*
 * Personal custom avatar   
   *place your graduation and comments*
 
 ## Bonus
 
-*place your graduation and comments*
+*Smiley integration in the messages*

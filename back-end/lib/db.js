@@ -41,7 +41,7 @@ module.exports = {
 
           channel = JSON.parse(value)
           channel.id = key.split(':')[1]
-          console.log(channel);
+
 
           if(channel.admin===email)
           {
@@ -67,7 +67,6 @@ module.exports = {
       if(!channel) throw Error('Data error')
 
       db.put(`channels:${id}`, JSON.stringify(channel))
-      console.log(channel);
 
       return merge(channel, {id: id})
     },
@@ -135,7 +134,6 @@ module.exports = {
        }))
     },
     delete: (channelId,creation) => {
-      //console.log(channelId);
       db.del(`messages:${channelId}:${creation}`)
 
     }
@@ -171,9 +169,6 @@ module.exports = {
       })
     },
     update: (id, user) => {
-      console.log('ookoko');
-      console.log(user);
-      console.log(id);
       db.put(`users:${id}`, JSON.stringify(user))
       return merge(user)
     },

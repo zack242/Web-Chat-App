@@ -1,41 +1,24 @@
 /** @jsxImportSource @emotion/react */
-import {useContext, useRef, useState, useEffect} from 'react';
+import {useContext,useState} from 'react';
 import axios from 'axios';
-// Layout
-import { useTheme } from '@mui/styles';
-import {Fab} from '@mui/material';
-import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 // Local
-import Form from './channel/Form'
-import List from './channel/List'
 import Context from './Context'
-import Header from './Header'
-import { useNavigate, useParams } from 'react-router-dom'
-
-import TextField from '@mui/material/TextField';
-import Grid from '@mui/material/Grid';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import { styled } from '@mui/material/styles';
-import Switch from '@mui/material/Switch';
-import Gravatar from 'react-circle-gravatar'
-import { Image } from 'react-native'
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
-import Stack from '@mui/material/Stack';
-import Avatar from '@mui/material/Avatar';
-import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
-import IconButton from '@mui/material/IconButton';
-
-
 import avatar1 from './icons/avatar1.png';
 import avatar2 from './icons/avatar2.png';
 import avatar3 from './icons/avatar3.png';
 import avatar4 from './icons/avatar4.jpg';
 import avatar5 from './icons/avatar5.png';
+// Layout
+import { useTheme } from '@mui/styles';
+import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import { styled } from '@mui/material/styles';
+import Switch from '@mui/material/Switch';
+import Gravatar from 'react-circle-gravatar'
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import Stack from '@mui/material/Stack';
 
 
 const useStyles = (theme) => ({
@@ -67,6 +50,7 @@ const useStyles = (theme) => ({
         display: "block"
   }
 })
+
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 34,
@@ -117,23 +101,14 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 export default function Settings() {
 
   const styles = useStyles(useTheme())
-  const [user,setUser] = useState()
-  const [age, setAge] = useState('');
   const [isAvatar,setisAvatar] = useState(false)
   const [isGravavatar,setisGravavatar] = useState(true)
   const [avatar,setAvatar]=useState(avatar1)
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
   const {
     oauth,
   } = useContext(Context)
 
-  const handleChange1 = () =>
-  {
-    setisAvatar(!isAvatar);
-  }
   const handleChangeGravatar = (e,c) =>
   {
    setisGravavatar(c)
@@ -142,34 +117,20 @@ export default function Settings() {
   const handleChangeAvatar = (name) =>
   {
    setAvatar(name)
-
   }
-
-  const [drawerMobileVisible, setDrawerMobileVisible] = useState(false)
-  const drawerToggleListener = () => {
-      setDrawerMobileVisible(!drawerMobileVisible)
-    }
 
  const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
  const saveConfig = async () =>
  {
-   console.log(avatar);
-   const  user = await axios.put(`http://localhost:3001/users/${oauth.email}`,
+      await axios.put(`http://localhost:3001/users/${oauth.email}`,
       {id:oauth.email,email:oauth.email,avatar:avatar})
-
- }
-
- const test = async () =>
- {
-   console.log('(kkkk)');
-   const  users = await axios.get(`http://localhost:3001/users/`)
-   console.log(users);
 
  }
 
 
   return(
+
      <div css={styles.root}>
        <center>
         <div css={styles.container}>

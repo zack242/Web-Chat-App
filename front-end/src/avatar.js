@@ -1,9 +1,8 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import Gravatar from 'react-circle-gravatar'
 /** @jsxImportSource @emotion/react */
-import { useState,useContext} from 'react'
+import { useState} from 'react'
 import axios from 'axios';
 // Layout
 
@@ -11,10 +10,7 @@ export default function ImageAvatars({
  email,
 }) {
 
-
 const [user,setuser]=useState('');
-const [avatar,setAvatar] = useState('');
-
 
 const fetch = async() =>
 {
@@ -31,8 +27,6 @@ try {
 
 }
 fetch()
-console.log('ok');
-console.log(user);
 
   return (
    <div>

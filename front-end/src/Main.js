@@ -9,8 +9,8 @@ import { Drawer } from '@mui/material';
 import Context from './Context'
 import Channels from './Channels'
 import Channel from './Channel'
-import Welcome from './Welcome'
 import Settings from './Settings'
+
 import {
   Route,
   Routes,
@@ -53,8 +53,7 @@ export default function Main() {
         }}
         variant="persistent"
         open={isDrawerVisible}
-        css={[styles.drawer, isDrawerVisible && styles.drawerVisible]}
-      >
+        css={[styles.drawer, isDrawerVisible && styles.drawerVisible]}>
         <Channels />
       </Drawer>
       <Routes>

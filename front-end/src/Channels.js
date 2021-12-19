@@ -3,23 +3,14 @@
 import {useContext, useEffect} from 'react';
 import axios from 'axios';
 // Layout
-import {Link} from '@mui/material';
 import { useTheme } from '@mui/styles';
 import { styled } from '@mui/material/styles';
 import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import List from '@mui/material/List';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
-import ListItemButton from '@mui/material/ListItemButton';
-import Divider from '@mui/material/Divider';
-import DraftsIcon from '@mui/icons-material/Drafts';
 import Badge from '@mui/material/Badge';
 import MailIcon from '@mui/icons-material/Mail';
 import SettingsIcon from '@mui/icons-material/Settings';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
 import SearchIcon from '@mui/icons-material/Search';
 import Stack from '@mui/material/Stack';
 import IconButton from '@mui/material/IconButton';
@@ -27,24 +18,20 @@ import IconButton from '@mui/material/IconButton';
 import Context from './Context'
 import {useNavigate} from 'react-router-dom'
 import Gravatar from 'react-circle-gravatar'
-import { Link as RouterLink } from 'react-router-dom';
 import ResponsiveDialog from './addChannel';
-import Settings from './Settings.js'
-import ImageAvatars from './avatar.js'
 
 
 const useStyles = (theme) => ({
- profil :
- {
+  profil : {
    borderBottom : '0px solid white',
  },
- liste :
- {
+ liste : {
    textDecoration: 'none' ,
    borderBottom : '1px solid white',
    borderTop : '1px solid white',
  },
 })
+
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -97,16 +84,14 @@ export default function Channels() {
      }
      fetch()
   },[oauth, setChannels])
-  console.log(channels);
 
   return(
     <div>
-        <ImageAvatars email={oauth.email} />
     <div css={styles.profil}>
         <center css={{marginTop : '10px'}}>
-           <StyledBadge overlap="circular" anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} variant="dot">
+          <StyledBadge overlap="circular" anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} variant="dot">
               <Gravatar size={90} email={oauth.email} rating="g"/>
-            </StyledBadge>
+          </StyledBadge>
 
         <h4> {oauth.username} </h4>
         <h5> {oauth.email} </h5>
@@ -129,19 +114,20 @@ export default function Channels() {
 
     <List>
      {channels.map((channel, i) => (
-        <ListItem button key={i} href={`/channels/${channel.id}`}
-         onClick={ (e) => {
-         e.preventDefault()
-         navigate(`/channels/${channel.id}`)}}
-         css={styles.liste}>
+       
+          <ListItem button key={i} href={`/channels/${channel.id}`}
+           onClick={ (e) => {
+           e.preventDefault()
+           navigate(`/channels/${channel.id}`)}}
+           css={styles.liste}>
 
-         <ListItemText primary={channel.name} secondary='Last Message'/>
+           <ListItemText primary={channel.name} secondary='Last Message'/>
 
-         <Badge badgeContent={1} color="success">
-            <MailIcon color="secondary" />
-         </Badge>
+           <Badge badgeContent={1} color="success">
+              <MailIcon color="secondary" />
+           </Badge>
 
-        </ListItem>
+          </ListItem>
       ))}
     </List>
 

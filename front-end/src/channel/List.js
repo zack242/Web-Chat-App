@@ -1,33 +1,15 @@
 
 /** @jsxImportSource @emotion/react */
-import {forwardRef, useImperativeHandle, useLayoutEffect, useRef,useState,useContext} from 'react'
+import {forwardRef, useImperativeHandle, useLayoutEffect, useRef,useState} from 'react'
 import {useTheme} from '@mui/styles';
-import {unified} from 'unified'
-import markdown from 'remark-parse'
-import remark2rehype from 'remark-rehype'
-import html from 'rehype-stringify'
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import * as React from 'react';
 import IconButton from '@mui/material/IconButton';
-import Input from '@mui/material/Input';
-import Context from '../Context'
-import FullFeaturedCrudGrid from '../tmp.js'
-import ContentEditable from 'react-contenteditable'
 import TextField from '@mui/material/TextField';
-import Tooltip from '@mui/material/Tooltip';
-import Button from '@mui/material/Button';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
-import Gravatar from 'react-gravatar'
-import { styled } from '@mui/material/styles';
-import ButtonBase from '@mui/material/ButtonBase';
-import Fade from '@mui/material/Fade';
 
 import dayjs from 'dayjs'
 import calendar from 'dayjs/plugin/calendar'
@@ -92,9 +74,6 @@ export default forwardRef(({
   useImperativeHandle(ref, () => ({ scroll: scroll }));
   const rootEl = useRef(null)
   const scrollEl = useRef(null)
-  const scroll = () => {
-    scrollEl.current.scrollIntoView()
-   }
   const throttleTimeout = useRef(null) // react-hooks/exhaustive-deps
   const [isEditable, setisEditable] = useState(true);
   const [isEditMode, setisEditMode] = useState(true);
@@ -102,43 +81,36 @@ export default forwardRef(({
   const [index, setIndex] = useState('-1');
 
 
-    const handleEdit = (index) => {
+
+  const scroll = () => {
+    scrollEl.current.scrollIntoView()
+   }
+  const handleEdit = (index) => {
     setIndex(index)
     setEditedMessage(messages[index].content)
     setisEditable(!isEditable)
-   }
-
-    const handleChangeEdit = (e) => {
+  }
+  const handleChangeEdit = (e) => {
       setEditedMessage(e.target.value)
-    }
+  }
 
-    const handleSetEdited = async () =>
-    {
-      console.log(messages[index].content);
+  const handleSetEdited = async () => {
       messages[index].content=editedMessage;
       setisEditable(!isEditable)
-
       await axios.put(`http://localhost:3001/channels/${channel.id}/messages`,
         {
           content: messages[index]
         }
-
     )}
 
     const handleClose = () =>
     {
-        setisEditable(!isEditable)
-        console.log('on close')
-      }
-
+        setisEditable(!isEditable)}
 
     const handleDelete = async (index) =>
     {
-       console.log('on supprimer')
-       console.log(index);
        const creation = messages[index].creation
-       await axios.put(`http://localhost:3001/channels/${channel.id}/${creation}`)
-     }
+       await axios.put(`http://localhost:3001/channels/${channel.id}/${creation}`)}
 
     useLayoutEffect(() => {
 
@@ -157,28 +129,8 @@ export default forwardRef(({
 
     })
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
-    };
-    const handleCloseItem = () => {
-      setAnchorEl(null);
-  };
-
-  const handleEditMode = () =>
-  {
-    setisEditMode(!isEditMode)
-    console.log('ok');
-
-  }
-
-  const handletest = (e) =>
-  {
-    var today = Date(e);
-    console.log(today);
-
-  }
+    const handleEditMode = () =>
+    { setisEditMode(!isEditMode) }
 
 
 
@@ -186,10 +138,7 @@ export default forwardRef(({
        <div css={styles.root} ref={rootEl}>
        <ul>
         { messages.map((message, i) => {
-
-          const {value} = unified().use(markdown).use(remark2rehype).use(html).processSync(message.content);
           const time = message.date
-
           return (
                 <li key={i}>
 
@@ -206,7 +155,7 @@ export default forwardRef(({
                             </Typography>
                             <Typography variant="body2" gutterBottom>
                             <Grid item="item" xs="xs">
-                            { (isEditable && i==index) ?
+                            { (isEditable && i===index) ?
 
                               (
                                 <span>

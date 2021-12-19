@@ -1,13 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { useContext } from 'react';
-import { styled } from '@mui/material/styles';
 // Layout
 import { useTheme } from '@mui/styles';
-import { IconButton, Link } from '@mui/material';
+import { IconButton} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useNavigate, useParams } from 'react-router-dom';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Stack from '@mui/material/Stack';
@@ -33,10 +29,10 @@ const useStyles = (theme) => ({
   },
 })
 
-
 export default function Header({
   drawerToggleListener,
   }) {
+
     const styles = useStyles(useTheme())
     const {
       oauth, setOauth,
@@ -56,46 +52,43 @@ export default function Header({
     }
 
   return (
-    <header css={styles.header}>
-      <IconButton
-        color="inherit"
-        aria-label="open drawer"
-        onClick={drawerToggle}
-        css={styles.menu}>
-        <MenuIcon />
-      </IconButton>
-      {
-        oauth ?
-          <span>
-            <Grid container spacing={3} columns={5} css={{borderBottom:'solid 4px white '}}>
-            <Grid item xs={4}>
-              <div css={{textAlign: 'center'}}>
-              <h2> { channel ? channel.name : 'NetoChat' } </h2>
-              </div>
-            </Grid>
+
+  <header css={styles.header}>
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          onClick={drawerToggle}
+          css={styles.menu}>
+          <MenuIcon />
+        </IconButton>
+        {
+          oauth ?
+            <span>
+              <Grid container spacing={3} columns={5} css={{borderBottom:'solid 4px white '}}>
+              <Grid item xs={4}>
+                <div css={{textAlign: 'center'}}>
+                <h2> { channel ? channel.name : 'NetoChat' } </h2>
+                </div>
+              </Grid>
 
             <Grid item xs={1}>
-            <div css={{textAlign: 'right',marginTop : '15px'}}>
-            <Stack
-              direction="row"
-              justifyContent='flex-end'
-              spacing={1}>
-              { id ? (<div><BasicMenu /></div>) :
-              (<div></div>)
-              }
-              <IconButton aria-label="delete" color="secondary" onClick={onClickLogout}>
-              <LogoutIcon />
-              </IconButton>
-            </Stack>
-
-            </div>
-
+              <div css={{textAlign: 'right',marginTop : '15px'}}>
+                  <Stack
+                  direction="row"
+                  justifyContent='flex-end'
+                  spacing={1}>
+                  { id ? (<div><BasicMenu /></div>) :
+                  (<div></div>)}
+                    <IconButton aria-label="delete" color="secondary" onClick={onClickLogout}>
+                    <LogoutIcon />
+                    </IconButton>
+                  </Stack>
+              </div>
             </Grid>
             </Grid>
           </span>
         :
         <span></span>
-
       }
     </header>
   );

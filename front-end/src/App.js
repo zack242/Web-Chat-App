@@ -1,16 +1,14 @@
 /** @jsxImportSource @emotion/react */
-import { useContext, useState } from 'react'
+import { useContext} from 'react'
 import { useTheme } from '@mui/styles';
 // Local
 import Oups from './Oups'
-import Header from './Header'
 import Main from './Main'
 import Login from './Login'
 import Context from './Context'
 import Settings from './Settings'
 // Rooter
 import {Route,Routes,Navigate,useLocation} from "react-router-dom"
-
 
 const useStyles = (theme) => ({
   root: {

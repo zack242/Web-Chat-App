@@ -39,7 +39,6 @@ app.get('/channels/:id',authenticate, async (req, res) => {
 })
 
 app.put('/channels/:id', async (req, res) => {
-  console.log(req.body.channel.id);
   const channel = await db.channels.update(req.body.channel.id,req.body.channel)
   res.json(channel)
 })
@@ -59,12 +58,10 @@ app.get('/channels/:id/messages', async (req, res) => {
 app.post('/channels/:id/messages', async (req, res) => {
   req.body
   const message = await db.messages.create(req.params.id, req.body)
-  console.log(message);
   res.status(201).json(message)
 })
 
 app.put('/channels/:id/messages', async (req, res) => {
-  console.log(req.body);
   const message = await db.messages.update(req.body)
   res.status(200).json(message)
 })
@@ -93,7 +90,6 @@ app.get('/users/:id', async (req, res) => {
 })
 
 app.put('/users/:id', async (req, res) => {
-  console.log(req.body);
   const user = await db.users.update(req.params.id,req.body)
   res.json(user)
 })
