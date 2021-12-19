@@ -168,9 +168,10 @@ module.exports = {
       })
     },
     update: (id, user) => {
-      if(!user.username) throw Error('Invalid user')
-      const id = uuid()
-      await db.put(`users:${id}`, JSON.stringify(user))
+      console.log('ookoko');
+      console.log(user);
+      console.log(id);
+      db.put(`users:${id}`, JSON.stringify(user))
       return merge(user)
     },
     delete: (id, user) => {

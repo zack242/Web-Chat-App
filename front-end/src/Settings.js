@@ -142,7 +142,7 @@ export default function Settings() {
   const handleChangeAvatar = (name) =>
   {
    setAvatar(name)
-   console.log(name);
+
   }
 
   const [drawerMobileVisible, setDrawerMobileVisible] = useState(false)
@@ -152,13 +152,20 @@ export default function Settings() {
 
  const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
- const saveConfig = () =>
+ const saveConfig = async () =>
  {
-   console.log(Avatar);
-   console.log('utiliser le truc custom');
+   console.log(avatar);
+   const  user = await axios.put(`http://localhost:3001/users/${oauth.email}`,
+      {id:oauth.email,email:oauth.email,avatar:avatar})
 
 
+ }
 
+ const test = async () =>
+ {
+   console.log('(kkkk)');
+   const  users = await axios.get(`http://localhost:3001/users/`)
+   console.log(users);
 
  }
 
@@ -200,6 +207,7 @@ export default function Settings() {
             <Button onClick={() => handleChangeAvatar(avatar5)}> <img src={avatar5} alt="Logo" css={styles.image}/></Button>
         </ButtonGroup>
         <Button onClick={saveConfig}  variant="contained">Save new configuration</Button>
+          <Button onClick={test}  variant="contained">Save new configuration</Button>
         </Stack>
         </div>)
          :
