@@ -231,12 +231,7 @@ getuser()
            :
            (<div>
              New user
-             //
-             //
-             //
-             //
-             //
-             //
+          
              Appuyer sur le bouton pour cree un nouveau channel
              obligatoirement
                <ResponsiveDialog />

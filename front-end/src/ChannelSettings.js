@@ -27,15 +27,25 @@ export default function BasicMenu() {
   const open = Boolean(anchorEl);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-  
+
   const { id } = useParams()
   const {channels} = useContext(Context)
   const channel = channels.find( channel => channel.id === id)
   const [members,setMembers] = useState(channel.members)
-  const users = ['zakaria_009@hotmail.fr','zakaria.tozy@icloud.com','admin@example.com','nezri.dan@gmail.com'];
+  const [users,setusers]=useState([''])
+  const [options,setoptions]=useState([''])
+
+
+  const fetch = async () => {
+      const {data: users} = await axios.get(`http://localhost:3001/users`)
+      setusers(users)
+    }
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
+    console.log('oui');
+    fetch()
+    setoptions(users.map(function(item){return item.id;}));
   };
   const handleClose = () => {
     setAnchorEl(null);
@@ -96,7 +106,7 @@ export default function BasicMenu() {
         <Autocomplete
          multiple
          id="tags-standard"
-         options={users}
+         options={options}
          onChange={onTagsChange}
          defaultValue={members}
          getOptionLabel={(option) => option}

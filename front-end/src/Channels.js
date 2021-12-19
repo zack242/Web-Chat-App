@@ -17,7 +17,6 @@ import IconButton from '@mui/material/IconButton';
 // Local
 import Context from './Context'
 import {useNavigate} from 'react-router-dom'
-import Gravatar from 'react-circle-gravatar'
 import ResponsiveDialog from './addChannel';
 import ImageAvatars from './avatar.js'
 
