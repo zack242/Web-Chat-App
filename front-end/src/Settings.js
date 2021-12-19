@@ -22,6 +22,10 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import Stack from '@mui/material/Stack';
 
 
+import VerticalLinearStepper from './WelcomePage';
+
+
+
 const useStyles = (theme) => ({
   root: {
     height: '100%',
@@ -230,10 +234,11 @@ getuser()
             </div>)
            :
            (<div>
-             New user
-          
-             Appuyer sur le bouton pour cree un nouveau channel
-             obligatoirement
+
+             <h1>Welcome !</h1>
+             <VerticalLinearStepper />
+             <h6>Appuyer sur le bouton pour cree un nouveau channel
+             obligatoirement</h6>
                <ResponsiveDialog />
 
            </div>)
