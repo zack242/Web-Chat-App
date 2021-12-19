@@ -42,8 +42,10 @@ export default function Form({
       , {
         content: text,
         author: oauth.username,
+        authorid :oauth.email,
       })
       addMessage(message)
+      console.log(message);
       setText('')
 
     }

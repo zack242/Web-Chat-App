@@ -158,7 +158,6 @@ export default function Settings() {
    const  user = await axios.put(`http://localhost:3001/users/${oauth.email}`,
       {id:oauth.email,email:oauth.email,avatar:avatar})
 
-
  }
 
  const test = async () =>

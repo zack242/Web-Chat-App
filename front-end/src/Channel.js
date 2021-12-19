@@ -63,7 +63,7 @@ export default function Channel() {
         }
         }
 
-  const interval = setInterval(() => {fetch()},1);
+  const interval = setInterval(() => {fetch()},1000);
   return () => clearInterval(interval);
 
   },[id, oauth, navigate])

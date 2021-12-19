@@ -38,6 +38,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import DehazeIcon from '@mui/icons-material/Dehaze';
 
+import ImageAvatars from '../avatar.js'
+
 
 dayjs.extend(calendar)
 dayjs.extend(updateLocale)
@@ -84,7 +86,6 @@ export default forwardRef(({
   messages,
   onScrollDown
   },ref) =>
-
 {
   const styles = useStyles(useTheme())
   // Expose the `scroll` action
@@ -179,6 +180,8 @@ export default forwardRef(({
 
   }
 
+
+
     return (
        <div css={styles.root} ref={rootEl}>
        <ul>
@@ -193,7 +196,7 @@ export default forwardRef(({
                   <Paper sx={{ p: 2, margin: 'auto', maxWidth: 1000, flexGrow: 1, marginBottom: '10px;' }}>
                     <Grid container spacing={2}>
                       <Grid item>
-                        <Gravatar css={{borderRadius: 400/ 2}} size={50} email={message.author} rating="g" default="mm"/>
+                        <ImageAvatars email={message.authorid} />
                       </Grid>
                         <Grid item xs={12} sm container>
                         <Grid item xs container direction="column" spacing={2}>

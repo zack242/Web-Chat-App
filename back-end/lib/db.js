@@ -97,6 +97,7 @@ module.exports = {
 
       await db.put(`messages:${channelId}:${creation}`, JSON.stringify({
         author: message.author,
+        authorid : message.authorid,
         content: message.content,
         date : today
       }))
@@ -128,7 +129,9 @@ module.exports = {
         db.put(`messages:${id}:${creation}`,
          JSON.stringify({
          author: message.content.author,
-         content: message.content.content
+         authorid : message.content.authorid,
+         content: message.content.content,
+         date : message.content.date,
        }))
     },
     delete: (channelId,creation) => {

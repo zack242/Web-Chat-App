@@ -57,7 +57,9 @@ app.get('/channels/:id/messages', async (req, res) => {
 })
 
 app.post('/channels/:id/messages', async (req, res) => {
+  req.body
   const message = await db.messages.create(req.params.id, req.body)
+  console.log(message);
   res.status(201).json(message)
 })
 

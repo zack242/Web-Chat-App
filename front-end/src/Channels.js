@@ -30,6 +30,7 @@ import Gravatar from 'react-circle-gravatar'
 import { Link as RouterLink } from 'react-router-dom';
 import ResponsiveDialog from './addChannel';
 import Settings from './Settings.js'
+import ImageAvatars from './avatar.js'
 
 
 const useStyles = (theme) => ({
@@ -100,6 +101,7 @@ export default function Channels() {
 
   return(
     <div>
+        <ImageAvatars email={oauth.email} />
     <div css={styles.profil}>
         <center css={{marginTop : '10px'}}>
            <StyledBadge overlap="circular" anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} variant="dot">
