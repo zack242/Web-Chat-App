@@ -145,7 +145,7 @@ export default forwardRef(({
                   <Paper sx={{ p: 2, margin: 'auto', maxWidth: 1000, flexGrow: 1, marginBottom: '10px;' }}>
                     <Grid container spacing={2}>
                       <Grid item>
-                        <ImageAvatars email={message.authorid} />
+                        <ImageAvatars email={message.authorid} size={60} />
                       </Grid>
                         <Grid item xs={12} sm container>
                         <Grid item xs container direction="column" spacing={2}>

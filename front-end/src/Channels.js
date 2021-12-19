@@ -19,6 +19,7 @@ import Context from './Context'
 import {useNavigate} from 'react-router-dom'
 import Gravatar from 'react-circle-gravatar'
 import ResponsiveDialog from './addChannel';
+import ImageAvatars from './avatar.js'
 
 
 const useStyles = (theme) => ({
@@ -90,7 +91,7 @@ export default function Channels() {
     <div css={styles.profil}>
         <center css={{marginTop : '10px'}}>
           <StyledBadge overlap="circular" anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} variant="dot">
-              <Gravatar size={90} email={oauth.email} rating="g"/>
+            <ImageAvatars email={oauth.email} size={90} />
           </StyledBadge>
 
         <h4> {oauth.username} </h4>
@@ -114,7 +115,7 @@ export default function Channels() {
 
     <List>
      {channels.map((channel, i) => (
-       
+
           <ListItem button key={i} href={`/channels/${channel.id}`}
            onClick={ (e) => {
            e.preventDefault()

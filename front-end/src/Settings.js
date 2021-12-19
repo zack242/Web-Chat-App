@@ -127,6 +127,12 @@ export default function Settings() {
       {id:oauth.email,email:oauth.email,avatar:avatar})
 
  }
+ const saveConfig1 = async () =>
+ {
+      await axios.put(`http://localhost:3001/users/${oauth.email}`,
+      {id:oauth.email,email:oauth.email})
+
+ }
 
 
   return(
@@ -166,13 +172,14 @@ export default function Settings() {
             <Button onClick={() => handleChangeAvatar(avatar4)}> <img src={avatar4} alt="Logo" css={styles.image}/></Button>
             <Button onClick={() => handleChangeAvatar(avatar5)}> <img src={avatar5} alt="Logo" css={styles.image}/></Button>
         </ButtonGroup>
-        <Button onClick={saveConfig}  variant="contained">Save new configuration</Button>
-          <Button onClick={test}  variant="contained">Save new configuration</Button>
+        <Button onClick={saveConfig}  variant="contained">use custome avatar</Button>
         </Stack>
         </div>)
          :
          (
-           <div></div>
+           <div>
+             <Button onClick={saveConfig1}  variant="contained">use gravatar</Button>
+           </div>
          )
        }
 
