@@ -8,6 +8,7 @@ import avatar2 from './icons/avatar2.png';
 import avatar3 from './icons/avatar3.png';
 import avatar4 from './icons/avatar4.jpg';
 import avatar5 from './icons/avatar5.png';
+import ResponsiveDialog from './addChannel';
 // Layout
 import { useTheme } from '@mui/styles';
 import TextField from '@mui/material/TextField';
@@ -104,6 +105,7 @@ export default function Settings() {
   const [isAvatar,setisAvatar] = useState(false)
   const [isGravavatar,setisGravavatar] = useState(true)
   const [avatar,setAvatar]=useState(avatar1)
+  const [isfirst,setIsfirst]=useState(false)
 
   const {
     oauth,
@@ -131,79 +133,119 @@ export default function Settings() {
  {
       await axios.put(`http://localhost:3001/users/${oauth.email}`,
       {id:oauth.email,email:oauth.email})
-
  }
 
+ const getuser = async () =>
+ {
+   const user = await axios.get(`http://localhost:3001/users/${oauth.email}`)
+
+   if(!user)
+   {
+     console.log('ici');
+     setIsfirst(false)
+   }else {
+     console.log('lll');
+     setIsfirst(true)
+   }
+
+ }
+getuser()
+
+ console.log(isfirst);
 
   return(
 
      <div css={styles.root}>
        <center>
-        <div css={styles.container}>
 
-          <Stack
-            direction="column"
-            justifyContent="center"
-            alignItems="center"
-            spacing={1}>
+         {isfirst ?
+           (<div>
 
-          {isGravavatar ? (
-          <div>
-          <Gravatar size={190} email={oauth.email} rating="g"/>
-          <h5>Gravatar avatar</h5>
-          </div>
-        ) : (
-          <div>
-          <img src={avatar} alt="Logo" css={styles.pdp}/>
-          <h5>Custom avatar</h5>
-          </div>)}
+             <div css={styles.container}>
 
-        <h5> Switch avatar </h5>
-        <Switch {...label} defaultChecked onChange={handleChangeGravatar}/>
+               <Stack
+                 direction="column"
+                 justifyContent="center"
+                 alignItems="center"
+                 spacing={1}>
 
-        { isAvatar ?
-        (
-        <div>
-        <Stack spacing={3}>
-        <ButtonGroup sx={{border:'1px solid white'}}>
-            <Button onClick={() => handleChangeAvatar(avatar1)}> <img src={avatar1} alt="Logo" css={styles.image}/></Button>
-            <Button onClick={() => handleChangeAvatar(avatar2)}> <img src={avatar2} alt="Logo" css={styles.image}/></Button>
-            <Button onClick={() => handleChangeAvatar(avatar3)}> <img src={avatar3} alt="Logo" css={styles.image}/></Button>
-            <Button onClick={() => handleChangeAvatar(avatar4)}> <img src={avatar4} alt="Logo" css={styles.image}/></Button>
-            <Button onClick={() => handleChangeAvatar(avatar5)}> <img src={avatar5} alt="Logo" css={styles.image}/></Button>
-        </ButtonGroup>
-        <Button onClick={saveConfig}  variant="contained">use custome avatar</Button>
-        </Stack>
-        </div>)
-         :
-         (
-           <div>
-             <Button onClick={saveConfig1}  variant="contained">use gravatar</Button>
-           </div>
-         )
-       }
+               {isGravavatar ? (
+               <div>
+               <Gravatar size={190} email={oauth.email} rating="g"/>
+               <h5>Gravatar avatar</h5>
+               </div>
+             ) : (
+               <div>
+               <img src={avatar} alt="Logo" css={styles.pdp}/>
+               <h5>Custom avatar</h5>
+               </div>)}
 
-        <Grid container spacing={2}>
-           <Grid item xs={12} >
-           <TextField   label="First name" variant="filled" />
-           </Grid>
+             <h5> Switch avatar </h5>
+             <Switch {...label} defaultChecked onChange={handleChangeGravatar}/>
 
-           <Grid item xs={12}>
-           <TextField    id="filled-disabled" variant="filled" color="secondary" label="username"   />
-           </Grid>
+             { isAvatar ?
+             (
+             <div>
+             <Stack spacing={3}>
+             <ButtonGroup sx={{border:'1px solid white'}}>
+                 <Button onClick={() => handleChangeAvatar(avatar1)}> <img src={avatar1} alt="Logo" css={styles.image}/></Button>
+                 <Button onClick={() => handleChangeAvatar(avatar2)}> <img src={avatar2} alt="Logo" css={styles.image}/></Button>
+                 <Button onClick={() => handleChangeAvatar(avatar3)}> <img src={avatar3} alt="Logo" css={styles.image}/></Button>
+                 <Button onClick={() => handleChangeAvatar(avatar4)}> <img src={avatar4} alt="Logo" css={styles.image}/></Button>
+                 <Button onClick={() => handleChangeAvatar(avatar5)}> <img src={avatar5} alt="Logo" css={styles.image}/></Button>
+             </ButtonGroup>
+             <Button onClick={saveConfig}  variant="contained">use custome avatar</Button>
+             </Stack>
+             </div>)
+              :
+              (
+                <div>
+                  <Button onClick={saveConfig1}  variant="contained">use gravatar</Button>
+                </div>
+              )
+            }
 
-           <Grid item xs={12}>
-           <TextField   id="outlined-basic" label={oauth.email} variant="filled" />
+             <Grid container spacing={2}>
+                <Grid item xs={12} >
+                <TextField   label="First name" variant="filled" />
+                </Grid>
 
-           </Grid>
-           <Grid item xs={12}>
-           <FormControlLabel
-            control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
-            label="Theme"/>
-         </Grid>
-       </Grid>
-       </Stack>
-    </div>
+                <Grid item xs={12}>
+                <TextField    id="filled-disabled" variant="filled" color="secondary" label="username"   />
+                </Grid>
+
+                <Grid item xs={12}>
+                <TextField   id="outlined-basic" label={oauth.email} variant="filled" />
+
+                </Grid>
+                <Grid item xs={12}>
+                <FormControlLabel
+                 control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
+                 label="Theme"/>
+              </Grid>
+            </Grid>
+            </Stack>
+         </div>
+
+            </div>)
+           :
+           (<div>
+             New user
+             //
+             //
+             //
+             //
+             //
+             //
+             Appuyer sur le bouton pour cree un nouveau channel
+             obligatoirement
+               <ResponsiveDialog />
+
+           </div>)
+         }
+
+
+
       </center>
     </div>
 
