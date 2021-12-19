@@ -27,13 +27,25 @@ export default function ResponsiveDialog() {
   const [open, setOpen] = React.useState(false);
   const {channels, setChannels,oauth} = useContext(Context);
   const [content, setContent] = useState('');
+
   const [members, setMembers] = useState([oauth.email]);
+  const [users,setusers]=useState([''])
+  const [options,setoptions]=useState([''])
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
   const navigate = useNavigate()
 
+  const fetch = async () => {
+
+      const {data: users} = await axios.get(`http://localhost:3001/users`)
+
+      setusers(users)
+
+    }
 
   const handleClickOpen = () => {
     setOpen(true);
+    fetch()
+    setoptions(users.map(function(item){return item.id;}));
   };
   const handleClose = () => {
     setOpen(false)
@@ -92,7 +104,7 @@ return(
             <Autocomplete
              multiple
              id="tags-standard"
-             options={users}
+             options={options}
              onChange={onTagsChange}
              getOptionLabel={(option) => option}
 
@@ -103,7 +115,7 @@ return(
                 label="Members"
                 placeholder="example@user.com"
                 /> )}/>
-              
+
                     <DialogActions>
                       <center>
                         <Stack
@@ -133,5 +145,3 @@ return(
         </div>
       );
 }
-
-const users = ['zakaria_009@hotmail.fr','zakaria.tozy@icloud.com','admin@example.com','nezri.dan@gmail.com'];
