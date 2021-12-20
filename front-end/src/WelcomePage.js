@@ -81,8 +81,9 @@ export default function VerticalLinearStepper() {
       </Stepper>
       {activeStep === steps.length && (
         <Paper square elevation={0} sx={{ p: 3 }}>
-          <h6>Appuyer sur le bouton pour cree un nouveau channel
-          obligatoirement</h6>
+          <h6>Start using our application creating a new channel.
+          Click on the button below !
+          </h6>
           <ResponsiveDialog />
           <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
             Reset

@@ -1,7 +1,6 @@
 
-# Chat application - final project
+# Chat application - final project - NetoChat
 
-*
 The project creates a Chat application similar to Discord, WhatApps, or Keybase with a minimal set of features. The user can securely create and manage channels, invite friends and post messages in a secure manner. By the end, the user will be able:
 
 * To authenticate itself using an external provider with Oauth.
@@ -14,10 +13,10 @@ The project creates a Chat application similar to Discord, WhatApps, or Keybase 
 * Modify his settings.
 * Trust the Chat application because it is secured and the resource access is verified.
 
-*
 
 ## Usage
 
+*To be able to try out all the features of your application, it is necessary to use at least 2 users: the admin account (email: admin@example.com, password: password)*
 
 * Clone this repository, from your local machine:
   ```

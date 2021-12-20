@@ -166,11 +166,11 @@ export default forwardRef(({
                                   maxRows={2}/>
 
                                   <IconButton  onClick={handleSetEdited}>
-                                   <SaveIcon />
+                                   <SaveIcon color="secondary"/>
                                   </IconButton>
 
                                   <IconButton  onClick={handleClose}>
-                                    <CancelIcon/>
+                                    <CancelIcon color="secondary"/>
                                   </IconButton>
 
                                 </span>)
