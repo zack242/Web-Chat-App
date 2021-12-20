@@ -17,7 +17,7 @@ The project creates a Chat application similar to Discord, WhatApps, or Keybase 
 ## Usage
 
 *To be able to try out all the features of your application, it is necessary to use at least 2 users: the admin account (email: admin@example.com, password: password and your personal one)*
-
+<img src="https://i.ibb.co/F6FRk9K/Capture-d-cran-2021-12-20-22-31-06.png" alt="Capture-d-cran-2021-12-20-22-31-06" border="0">
 * Clone this repository, from your local machine:
   ```
   git clone https://github.com/zack242/project.git
