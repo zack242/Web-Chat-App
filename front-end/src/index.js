@@ -13,23 +13,25 @@ import {
 } from "react-router-dom";
 
 const theme = createTheme({
+
   palette: {
-  type: 'dark',
-  primary: {
-    main: '#3d6a97',
-  },
-  secondary: {
-    main: '#ffffff',
-    dark: '#000000',
-  },
-  background: {
-    default: '#18222d',
-    paper: '#203140',
-  },
-  text: {
-    primary: '#ffffff',
-    secondary: '#ffffff',
-  },
+    type: 'dark',
+    primary: {
+      main: '#3d6a97',
+    },
+    secondary: {
+      main: '#ffffff',
+      dark: '#000000',
+    },
+    background: {
+      default: '#18222d',
+      paper: '#203140',
+    },
+    text: {
+      primary: '#ffffff',
+      secondary: '#ffffff',
+    },
+  
 },
 props: {
   MuiList: {

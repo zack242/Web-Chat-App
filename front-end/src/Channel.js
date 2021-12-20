@@ -14,6 +14,11 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 
 const useStyles = (theme) => ({
+
+  palette: {
+    type: 'dark',
+  },
+
   root: {
     height: '100%',
     flex: '1 1 auto',
