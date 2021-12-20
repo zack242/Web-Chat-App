@@ -40,7 +40,7 @@
   },
   "scripts": {
     "reset": "bin/reset",
-    "develop": "bin/init && bin/start",
+    "develop": "bin/start",
     "start": "bin/start",
     "test": "TEST_PAYLOAD_EMAIL=admin@example.com mocha 'test/**/*.js'"
   }
