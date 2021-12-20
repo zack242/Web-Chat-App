@@ -1,6 +1,8 @@
 
 /** @jsxImportSource @emotion/react */
 import {useContext, useEffect} from 'react';
+import {useState} from "react"
+
 import axios from 'axios';
 // Layout
 import { useTheme } from '@mui/styles';
@@ -19,6 +21,8 @@ import Context from './Context'
 import {useNavigate} from 'react-router-dom'
 import ResponsiveDialog from './addChannel';
 import ImageAvatars from './avatar.js'
+import Input from '@mui/material/Input';
+
 
 
 const useStyles = (theme) => ({
@@ -85,6 +89,13 @@ export default function Channels() {
      fetch()
   },[oauth, setChannels])
 
+  const [searchTerm, setSearchTerm] = useState([]);
+
+  const handelSearchTerm = (e) => {
+    let value = e.target.value;
+    setSearchTerm(value);
+  }
+
   return(
     <div>
     <div css={styles.profil}>
@@ -95,6 +106,17 @@ export default function Channels() {
 
         <h4> {oauth.username} </h4>
         <h5> {oauth.email} </h5>
+
+        <div className="searchBar">
+          <Input 
+            type="text"
+            name="searchBar"
+            id="searchBar"
+            placeholder="Recherche"
+            onChange={handelSearchTerm}
+          />
+        </div>
+
 
         <Stack direction="row" spacing={2}>
 
@@ -113,7 +135,9 @@ export default function Channels() {
     </div>
 
     <List>
-     {channels.map((channel, i) => (
+     {channels.filter((channel, i) => {
+       return channel.name.includes(searchTerm)
+     }).map((channel, i) => (
 
           <ListItem button key={i} href={`/channels/${channel.id}`}
            onClick={ (e) => {
