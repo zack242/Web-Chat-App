@@ -51,6 +51,7 @@ export default function BasicMenu() {
     setAnchorEl(null);
   };
   const handleClickOpen1 = () => {
+    fetch()
     setOpen1(true);
   };
   const handleClose1 = () => {
