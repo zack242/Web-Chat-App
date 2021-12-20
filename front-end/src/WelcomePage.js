@@ -7,6 +7,8 @@ import StepContent from '@mui/material/StepContent';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
+import ResponsiveDialog from './addChannel';
+
 
 const steps = [
   {
@@ -79,7 +81,9 @@ export default function VerticalLinearStepper() {
       </Stepper>
       {activeStep === steps.length && (
         <Paper square elevation={0} sx={{ p: 3 }}>
-          <Typography>All steps completed - you&apos;re finished</Typography>
+          <h6>Appuyer sur le bouton pour cree un nouveau channel
+          obligatoirement</h6>
+          <ResponsiveDialog />
           <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
             Reset
           </Button>

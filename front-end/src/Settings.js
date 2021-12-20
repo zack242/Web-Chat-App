@@ -237,9 +237,7 @@ getuser()
 
              <h1>Welcome !</h1>
              <VerticalLinearStepper />
-             <h6>Appuyer sur le bouton pour cree un nouveau channel
-             obligatoirement</h6>
-               <ResponsiveDialog />
+
 
            </div>)
          }
