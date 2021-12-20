@@ -2,6 +2,7 @@
 /** @jsxImportSource @emotion/react */
 import {forwardRef, useImperativeHandle, useLayoutEffect, useRef,useState} from 'react'
 import {useTheme} from '@mui/styles';
+import {useContext} from 'react'
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
@@ -19,6 +20,7 @@ import axios from 'axios';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import DehazeIcon from '@mui/icons-material/Dehaze';
+import Context from '../Context'
 
 import ImageAvatars from '../avatar.js'
 
@@ -74,6 +76,7 @@ export default forwardRef(({
   useImperativeHandle(ref, () => ({ scroll: scroll }));
   const rootEl = useRef(null)
   const scrollEl = useRef(null)
+  const {oauth} = useContext(Context)
   const throttleTimeout = useRef(null) // react-hooks/exhaustive-deps
   const [isEditable, setisEditable] = useState(true);
   const [isEditMode, setisEditMode] = useState(true);
@@ -86,9 +89,15 @@ export default forwardRef(({
     scrollEl.current.scrollIntoView()
    }
   const handleEdit = (index) => {
+    if(oauth.email===messages[index].authorid)
+    {
     setIndex(index)
     setEditedMessage(messages[index].content)
     setisEditable(!isEditable)
+  }else
+  {
+
+  }
   }
   const handleChangeEdit = (e) => {
       setEditedMessage(e.target.value)
@@ -109,8 +118,12 @@ export default forwardRef(({
 
     const handleDelete = async (index) =>
     {
+      if(oauth.email===messages[index].authorid){
+
        const creation = messages[index].creation
-       await axios.put(`http://localhost:3001/channels/${channel.id}/${creation}`)}
+       await axios.put(`http://localhost:3001/channels/${channel.id}/${creation}`)
+}
+     }
 
     useLayoutEffect(() => {
 
