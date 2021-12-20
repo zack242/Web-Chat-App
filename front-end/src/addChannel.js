@@ -100,7 +100,7 @@ return(
             label="Channel name"
             value={content}
             onChange={handleChange}/>
-
+            <h6>you can only invite the users of the app </h6>
             <Autocomplete
              multiple
              id="tags-standard"

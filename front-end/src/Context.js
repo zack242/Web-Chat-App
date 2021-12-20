@@ -13,8 +13,6 @@ export const Provider = ({
   const [oauth, setOauth] = useState(cookies.oauth)
   const [drawerVisible, setDrawerVisible] = useState(false)
   const [channels, setChannels] = useState([])
-  const [theme, setTheme] = useState([])
-  const [themePerso, setThemePerso] = useState([])
   const [currentChannel, setCurrentChannel] = useState(null)
   return (
     <Context.Provider value={{

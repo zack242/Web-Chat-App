@@ -8,7 +8,6 @@ import avatar2 from './icons/avatar2.png';
 import avatar3 from './icons/avatar3.png';
 import avatar4 from './icons/avatar4.jpg';
 import avatar5 from './icons/avatar5.png';
-import ResponsiveDialog from './addChannel';
 // Layout
 import { useTheme } from '@mui/styles';
 import TextField from '@mui/material/TextField';
