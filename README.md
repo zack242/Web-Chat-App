@@ -16,7 +16,7 @@ The project creates a Chat application similar to Discord, WhatApps, or Keybase 
 
 ## Usage
 
-*To be able to try out all the features of your application, it is necessary to use at least 2 users: the admin account (email: admin@example.com, password: password)*
+*To be able to try out all the features of your application, it is necessary to use at least 2 users: the admin account (email: admin@example.com, password: password and your personal one)*
 
 * Clone this repository, from your local machine:
   ```
